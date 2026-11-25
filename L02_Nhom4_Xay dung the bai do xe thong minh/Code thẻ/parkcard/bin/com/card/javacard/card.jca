@@ -1,0 +1,4775 @@
+// converted by version 1.3
+// on Mon Jan 05 16:18:25 ICT 2026
+
+.package com/card {
+	.aid 0x11:0x22:0x33:0x44:0x55;
+	.version 1.0;
+
+	.imports {
+		0xA0:0x0:0x0:0x0:0x62:0x0:0x1 1.0;		//java/lang
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x1 1.3;		//javacard/framework
+		0xA0:0x0:0x0:0x0:0x62:0x1:0x2 1.3;		//javacard/security
+		0xA0:0x0:0x0:0x0:0x62:0x2:0x9 1.0;		//javacardx/apdu
+		0xA0:0x0:0x0:0x0:0x62:0x2:0x1 1.3;		//javacardx/crypto
+	}
+
+	.applet {
+		0x11:0x22:0x33:0x44:0x55:0x0 ParkingCard;
+	}
+
+	.constantPool {
+		// 0
+		instanceFieldRef short Avatar/size;
+		// 1
+		instanceFieldRef byte[] Avatar/data;
+		// 2
+		instanceFieldRef short CardModel/backendPublicKeyLen;
+		// 3
+		instanceFieldRef byte[] CardModel/id;
+		// 4
+		instanceFieldRef byte[] CardModel/idCard;
+		// 5
+		instanceFieldRef byte[] CardModel/fullName;
+		// 6
+		instanceFieldRef byte[] CardModel/dateofBirth;
+		// 7
+		instanceFieldRef byte[] CardModel/address;
+		// 8
+		instanceFieldRef byte[] CardModel/phoneNumber;
+		// 9
+		instanceFieldRef byte[] CardModel/numberPlate;
+		// 10
+		instanceFieldRef byte[] CardModel/money;
+		// 11
+		instanceFieldRef byte[] CardModel/expired;
+		// 12
+		instanceFieldRef Avatar CardModel/avatar;
+		// 13
+		instanceFieldRef byte[] CardModel/backendPublicKey;
+		// 14
+		instanceFieldRef boolean CardModel/isInside;
+		// 15
+		instanceFieldRef byte[] CardModel/entryTime;
+		// 16
+		instanceFieldRef 2.11 PBKDF2/sha256;
+		// 17
+		instanceFieldRef byte[] PBKDF2/ipad;
+		// 18
+		instanceFieldRef byte[] PBKDF2/opad;
+		// 19
+		instanceFieldRef byte[] PBKDF2/innerHash;
+		// 20
+		instanceFieldRef byte[] PBKDF2/tempU;
+		// 21
+		instanceFieldRef byte[] PBKDF2/tempResult;
+		// 22
+		instanceFieldRef byte[] PBKDF2/tempSaltCounter;
+		// 23
+		instanceFieldRef byte[] PIN/pinHash;
+		// 24
+		instanceFieldRef byte[] PIN/salt;
+		// 25
+		instanceFieldRef byte[] PIN/derivedKey;
+		// 26
+		instanceFieldRef byte[] PIN/tempHashBuffer;
+		// 27
+		instanceFieldRef byte PIN/tryLimit;
+		// 28
+		instanceFieldRef byte PIN/triesRemaining;
+		// 29
+		instanceFieldRef boolean PIN/isValidated;
+		// 30
+		instanceFieldRef 2.11 PIN/messageDigest;
+		// 31
+		instanceFieldRef PBKDF2 PIN/pbkdf2;
+		// 32
+		instanceFieldRef 2.14 PIN/random;
+		// 33
+		instanceFieldRef 2.9 ParkingCard/cachedBackendPubKey;
+		// 34
+		instanceFieldRef 2.15 ParkingCard/cachedSigVerify;
+		// 35
+		instanceFieldRef PBKDF2 ParkingCard/pbkdf2Engine;
+		// 36
+		instanceFieldRef 2.14 ParkingCard/rng;
+		// 37
+		instanceFieldRef 2.20 ParkingCard/masterKeyObj;
+		// 38
+		instanceFieldRef 2.20 ParkingCard/wrappingKeyObj;
+		// 39
+		instanceFieldRef 2.20 ParkingCard/transportKeyObj;
+		// 40
+		instanceFieldRef 4.1 ParkingCard/cipherData;
+		// 41
+		instanceFieldRef 4.1 ParkingCard/cipherWrap;
+		// 42
+		instanceFieldRef byte[] ParkingCard/masterKeyRAM;
+		// 43
+		instanceFieldRef byte[] ParkingCard/encryptedMasterKey_User;
+		// 44
+		instanceFieldRef byte[] ParkingCard/encryptedMasterKey_Admin;
+		// 45
+		instanceFieldRef byte[] ParkingCard/encryptedPrivateKeyExp;
+		// 46
+		instanceFieldRef byte[] ParkingCard/temporary;
+		// 47
+		instanceFieldRef byte[] ParkingCard/cipherBuffer;
+		// 48
+		instanceFieldRef byte[] ParkingCard/iv;
+		// 49
+		instanceFieldRef byte[] ParkingCard/vehicle;
+		// 50
+		instanceFieldRef 2.15 ParkingCard/signature;
+		// 51
+		instanceFieldRef byte[] ParkingCard/signatureBuffer;
+		// 52
+		instanceFieldRef byte[] ParkingCard/tempMessage;
+		// 53
+		instanceFieldRef byte[] ParkingCard/tempSignature;
+		// 54
+		instanceFieldRef byte[] ParkingCard/tempPinData;
+		// 55
+		instanceFieldRef boolean ParkingCard/isSecretValidated;
+		// 56
+		instanceFieldRef PIN ParkingCard/pin;
+		// 57
+		instanceFieldRef PIN ParkingCard/systemSecret;
+		// 58
+		instanceFieldRef CardModel ParkingCard/cardModel;
+		// 59
+		instanceFieldRef 2.8 ParkingCard/privateKey;
+		// 60
+		instanceFieldRef 2.9 ParkingCard/publicKey;
+		// 61
+		staticMethodRef 1.8.13(SB)[B;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+		// 62
+		staticMethodRef Avatar/<init>(S)V;
+		// 63
+		staticMethodRef 1.16.1([BS[BSS)S;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+		// 64
+		staticFieldRef byte[] ParkingCard/TRANSPORT_KEY_DATA;
+		// 65
+		staticMethodRef 4.1.0(BZ)Ljavacardx/crypto/Cipher;;		// javacardx/crypto/Cipher.getInstance(BZ)Ljavacardx/crypto/Cipher;
+			.descriptor	Ljavacardx/crypto/Cipher;	4.1;
+
+		// 66
+		staticMethodRef 1.16.3([BSSB)S;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+		// 67
+		staticMethodRef 0.0.0()V;		// java/lang/Object.<init>()V
+		// 68
+		staticMethodRef 1.7.1(S)V;		// javacard/framework/ISOException.throwIt(S)V
+		// 69
+		staticMethodRef 2.11.0(BZ)Ljavacard/security/MessageDigest;;		// javacard/security/MessageDigest.getInstance(BZ)Ljavacard/security/MessageDigest;
+			.descriptor	Ljavacard/security/MessageDigest;	2.11;
+
+		// 70
+		virtualMethodRef 2.11.4()V;		// reset()V
+		// 71
+		staticMethodRef 2.14.0(B)Ljavacard/security/RandomData;;		// javacard/security/RandomData.getInstance(B)Ljavacard/security/RandomData;
+			.descriptor	Ljavacard/security/RandomData;	2.14;
+
+		// 72
+		staticMethodRef 1.16.2([BS[BSS)S;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+		// 73
+		virtualMethodRef 2.14.1([BSS)V;		// generateData([BSS)V
+		// 74
+		staticMethodRef PIN/computeKEK([BSS)V;
+		// 75
+		virtualMethodRef PBKDF2/deriveKey([BSS[BSSS[BS)V;
+		// 76
+		staticMethodRef 2.15.0(BZ)Ljavacard/security/Signature;;		// javacard/security/Signature.getInstance(BZ)Ljavacard/security/Signature;
+			.descriptor	Ljavacard/security/Signature;	2.15;
+
+		// 77
+		staticMethodRef 1.16.0([BS[BSS)B;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+		// 78
+		virtualMethodRef PIN/resetPin()V;
+		// 79
+		staticMethodRef 1.3.0()V;		// javacard/framework/Applet.<init>()V
+		// 80
+		virtualMethodRef 2.11.1([BSS[BS)S;		// doFinal([BSS[BS)S
+		// 81
+		virtualMethodRef 2.11.5([BSS)V;		// update([BSS)V
+		// 82
+		classRef PBKDF2;
+		// 83
+		classRef ParkingCard;
+		// 84
+		staticMethodRef ParkingCard/<init>()V;
+		// 85
+		virtualMethodRef 1.3.2([BSB)V;		// register([BSB)V
+		// 86
+		staticMethodRef PBKDF2/<init>()V;
+		// 87
+		virtualMethodRef PIN/logout()V;
+		// 88
+		staticMethodRef PBKDF2/hmac([BSS[BSS[BS)V;
+		// 89
+		virtualMethodRef PIN/reset()V;
+		// 90
+		staticMethodRef ParkingCard/clearSession()V;
+		// 91
+		virtualMethodRef 1.3.3()Z;		// selectingApplet()Z
+		// 92
+		virtualMethodRef 1.10.1()[B;		// getBuffer()[B
+		// 93
+		staticMethodRef ParkingCard/verifySecret(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 94
+		staticMethodRef ParkingCard/createPIN(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 95
+		staticMethodRef ParkingCard/verifyPIN(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 96
+		staticMethodRef ParkingCard/updatePIN(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 97
+		staticMethodRef ParkingCard/resetPIN(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 98
+		staticMethodRef ParkingCard/updatePINDirect(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 99
+		staticMethodRef ParkingCard/createCard(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 100
+		virtualMethodRef PIN/isValidated()Z;
+		// 101
+		staticMethodRef ParkingCard/getCard(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 102
+		staticMethodRef ParkingCard/updateInfo(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 103
+		staticMethodRef ParkingCard/updateMoney(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 104
+		staticMethodRef ParkingCard/getMoney(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 105
+		staticMethodRef ParkingCard/updateExpired(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 106
+		staticMethodRef ParkingCard/updateMoneyDirect(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 107
+		staticMethodRef ParkingCard/getAvatar(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 108
+		staticMethodRef ParkingCard/updateAvatar(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 109
+		staticMethodRef ParkingCard/createSignature(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 110
+		staticMethodRef ParkingCard/getVehicle(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 111
+		staticMethodRef ParkingCard/updateVehicle(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 112
+		staticMethodRef ParkingCard/setBackendPublicKey(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 113
+		staticMethodRef ParkingCard/getCardId(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 114
+		staticMethodRef ParkingCard/getDbId(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 115
+		staticMethodRef ParkingCard/entryGate(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 116
+		staticMethodRef ParkingCard/exitGate(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 117
+		staticMethodRef ParkingCard/getEntryState(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 118
+		staticMethodRef ParkingCard/getCardNO(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 119
+		staticMethodRef ParkingCard/getPinTries(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 120
+		staticMethodRef ParkingCard/checkEmpty(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 121
+		staticMethodRef ParkingCard/checkValidity(Ljavacard/framework/APDU;)V;
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+		// 122
+		virtualMethodRef 4.1.3(Ljavacard/security/Key;B)V;		// init(Ljavacard/security/Key;B)V
+			.descriptor	Ljavacard/security/Key;	2.0;
+
+		// 123
+		virtualMethodRef 4.1.1([BSS[BS)S;		// doFinal([BSS[BS)S
+		// 124
+		classRef Avatar;
+		// 125
+		virtualMethodRef 1.10.8(SS)V;		// setOutgoingAndSend(SS)V
+		// 126
+		virtualMethodRef CardModel/getExpired()[B;
+		// 127
+		classRef 0.2;		// java/lang/Exception
+		// 128
+		virtualMethodRef 1.10.6()S;		// setIncomingAndReceive()S
+		// 129
+		staticMethodRef ParkingCard/decryptTransportData([BS[BS)S;
+		// 130
+		virtualMethodRef PIN/match([BSS)Z;
+		// 131
+		virtualMethodRef PIN/getKEK()[B;
+		// 132
+		staticMethodRef ParkingCard/restoreMasterKeyFromSlot([B[B)V;
+		// 133
+		classRef PIN;
+		// 134
+		staticMethodRef PIN/<init>([BSSBLcom/card/PBKDF2;)V;
+		// 135
+		staticMethodRef ParkingCard/generateAndBackupMasterKey([B)V;
+		// 136
+		virtualMethodRef PIN/check([BSS)Z;
+		// 137
+		virtualMethodRef PIN/update([BSS)V;
+		// 138
+		staticMethodRef ParkingCard/saveMasterKeyToSlot([B[B)V;
+		// 139
+		virtualMethodRef 4.1.4(Ljavacard/security/Key;B[BSS)V;		// init(Ljavacard/security/Key;B[BSS)V
+			.descriptor	Ljavacard/security/Key;	2.0;
+
+		// 140
+		staticMethodRef 1.8.1()V;		// javacard/framework/JCSystem.beginTransaction()V
+		// 141
+		classRef CardModel;
+		// 142
+		staticMethodRef CardModel/<init>()V;
+		// 143
+		staticMethodRef ParkingCard/encryptInfo([BSS[BS)V;
+		// 144
+		virtualMethodRef CardModel/setId([BSS)V;
+		// 145
+		virtualMethodRef CardModel/setIdCard([BSS)V;
+		// 146
+		virtualMethodRef CardModel/setFullName([BSS)V;
+		// 147
+		virtualMethodRef CardModel/setDateOfBirth([BSS)V;
+		// 148
+		virtualMethodRef CardModel/setAddress([BSS)V;
+		// 149
+		virtualMethodRef CardModel/setPhoneNumber([BSS)V;
+		// 150
+		virtualMethodRef CardModel/setNumberPlate([BSS)V;
+		// 151
+		virtualMethodRef CardModel/setMoney([BSS)V;
+		// 152
+		virtualMethodRef CardModel/setExpired([BSS)V;
+		// 153
+		staticMethodRef 1.8.2()V;		// javacard/framework/JCSystem.commitTransaction()V
+		// 154
+		virtualMethodRef ParkingCard/generateKeyPair()Ljavacard/security/KeyPair;;
+			.descriptor	Ljavacard/security/KeyPair;	2.16;
+
+		// 155
+		virtualMethodRef 2.16.2()Ljavacard/security/PrivateKey;;		// getPrivate()Ljavacard/security/PrivateKey;
+			.descriptor	Ljavacard/security/PrivateKey;	2.2;
+
+		// 156
+		classRef 2.8;		// javacard/security/RSAPrivateKey
+		// 157
+		staticMethodRef 2.13.0(BSZ)Ljavacard/security/Key;;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+			.descriptor	Ljavacard/security/Key;	2.0;
+
+		// 158
+		virtualMethodRef 2.16.3()Ljavacard/security/PublicKey;;		// getPublic()Ljavacard/security/PublicKey;
+			.descriptor	Ljavacard/security/PublicKey;	2.3;
+
+		// 159
+		classRef 2.9;		// javacard/security/RSAPublicKey
+		// 160
+		classRef 2.20;		// javacard/security/AESKey
+		// 161
+		virtualMethodRef ParkingCard/serializePublicKey(Ljavacard/security/RSAPublicKey;[BS)S;
+			.descriptor	Ljavacard/security/RSAPublicKey;	2.9;
+
+		// 162
+		staticMethodRef ParkingCard/checkAdminForCurrentCommandFromBuffer([BSS)Z;
+		// 163
+		staticMethodRef ParkingCard/applyInfoFromBuffer([BSS)V;
+		// 164
+		staticMethodRef 1.16.4([BS)S;		// javacard/framework/Util.getShort([BS)S
+		// 165
+		staticMethodRef 1.16.5(BB)S;		// javacard/framework/Util.makeShort(BB)S
+		// 166
+		virtualMethodRef CardModel/getAvatar()Lcom/card/Avatar;;
+		// 167
+		virtualMethodRef Avatar/getData()[B;
+		// 168
+		virtualMethodRef Avatar/getSize()S;
+		// 169
+		virtualMethodRef Avatar/setSize(S)V;
+		// 170
+		virtualMethodRef 1.10.15()S;		// getIncomingLength()S
+		// 171
+		virtualMethodRef 1.10.3(S)S;		// receiveBytes(S)S
+		// 172
+		staticMethodRef ParkingCard/decryptECBBlock([BSS[BS)V;
+		// 173
+		virtualMethodRef 1.10.7()S;		// setOutgoing()S
+		// 174
+		virtualMethodRef 1.10.9(S)V;		// setOutgoingLength(S)V
+		// 175
+		virtualMethodRef 1.10.5([BSS)V;		// sendBytesLong([BSS)V
+		// 176
+		virtualMethodRef CardModel/getIdCard()[B;
+		// 177
+		staticMethodRef ParkingCard/decryptInfoField([B[BS)S;
+		// 178
+		virtualMethodRef CardModel/getFullName()[B;
+		// 179
+		virtualMethodRef CardModel/getDateOfBirth()[B;
+		// 180
+		virtualMethodRef CardModel/getAddress()[B;
+		// 181
+		virtualMethodRef CardModel/getPhoneNumber()[B;
+		// 182
+		virtualMethodRef CardModel/getNumberPlate()[B;
+		// 183
+		virtualMethodRef CardModel/getMoney()[B;
+		// 184
+		virtualMethodRef PIN/getTriesRemaining()B;
+		// 185
+		virtualMethodRef CardModel/getIsInside()Z;
+		// 186
+		virtualMethodRef CardModel/setEntryTime([BSS)V;
+		// 187
+		virtualMethodRef CardModel/setIsInside(Z)V;
+		// 188
+		virtualMethodRef CardModel/getEntryTime()[B;
+		// 189
+		virtualMethodRef CardModel/getId()[B;
+		// 190
+		virtualMethodRef CardModel/setBackendPublicKey([BSS)V;
+		// 191
+		virtualMethodRef 2.15.3(Ljavacard/security/Key;B)V;		// init(Ljavacard/security/Key;B)V
+			.descriptor	Ljavacard/security/Key;	2.0;
+
+		// 192
+		virtualMethodRef 2.15.5([BSS[BS)S;		// sign([BSS[BS)S
+		// 193
+		staticMethodRef ParkingCard/copyAttr([B[BS)S;
+		// 194
+		staticMethodRef ParkingCard/verifySignatureFromBE([BS[BS)Z;
+		// 195
+		staticMethodRef ParkingCard/isAdminRole([BS)Z;
+		// 196
+		virtualMethodRef CardModel/getBackendPublicKey()[B;
+		// 197
+		virtualMethodRef 2.15.7([BSS[BSS)Z;		// verify([BSS[BSS)Z
+		// 198
+		classRef 2.16;		// javacard/security/KeyPair
+		// 199
+		staticMethodRef 2.16.0(BS)V;		// javacard/security/KeyPair.<init>(BS)V
+		// 200
+		virtualMethodRef 2.16.1()V;		// genKeyPair()V
+		// 201
+		staticMethodRef 1.16.6([BSS)S;		// javacard/framework/Util.setShort([BSS)S
+	}
+
+	.class public Avatar 0 extends 0.0 {		// extends java/lang/Object
+
+		.fields {
+			private final byte[] data 0;		// [B
+			private short size 1;		// S
+		}
+
+		.publicMethodTable 1 {
+			equals(Ljava/lang/Object;)Z;
+			setData([BSSS)V;
+			getData()[B;
+			getSize()S;
+			setSize(S)V;
+			clear()V;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.method public <init>(S)V 0 {
+			.stack 2;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 67;		// java/lang/Object.<init>()V
+					aload_0;
+					sconst_0;
+					putfield_s 0;		// short com/card/Avatar.size
+					aload_0;
+					sload_1;
+					newarray 11;
+					putfield_a 1;		// reference com/card/Avatar.data
+					return;
+		}
+
+		.method public setData([BSSS)V 1 {
+			.stack 5;
+			.locals 1;
+
+				L0:	sload_3;
+					sload 4;
+					sadd;
+					getfield_a_this 1;		// reference com/card/Avatar.data
+					arraylength;
+					if_scmple L2;
+				L1:	sspush 27012;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					sload_2;
+					getfield_a_this 1;		// reference com/card/Avatar.data
+					sload_3;
+					sload 4;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					sload_3;
+					sload 4;
+					sadd;
+					sstore 5;
+				L3:	sload 5;
+					getfield_s_this 0;		// short com/card/Avatar.size
+					if_scmple L5;
+				L4:	aload_0;
+					sload 5;
+					putfield_s 0;		// short com/card/Avatar.size
+				L5:	return;
+		}
+
+		.method public getData()[B 2 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 1;		// reference com/card/Avatar.data
+					areturn;
+		}
+
+		.method public getSize()S 3 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_s_this 0;		// short com/card/Avatar.size
+					sreturn;
+		}
+
+		.method public setSize(S)V 4 {
+			.stack 2;
+			.locals 0;
+
+				L0:	aload_0;
+					sload_1;
+					putfield_s 0;		// short com/card/Avatar.size
+					return;
+		}
+
+		.method public clear()V 5 {
+			.stack 4;
+			.locals 0;
+
+				L0:	getfield_a_this 1;		// reference com/card/Avatar.data
+					sconst_0;
+					getfield_a_this 1;		// reference com/card/Avatar.data
+					arraylength;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					aload_0;
+					sconst_0;
+					putfield_s 0;		// short com/card/Avatar.size
+					return;
+		}
+
+	}
+
+	.class public CardModel 1 extends 0.0 {		// extends java/lang/Object
+
+		.fields {
+			private final byte[] id 0;		// [B
+			private final byte[] idCard 1;		// [B
+			private final byte[] fullName 2;		// [B
+			private final byte[] dateofBirth 3;		// [B
+			private final byte[] address 4;		// [B
+			private final byte[] phoneNumber 5;		// [B
+			private final byte[] numberPlate 6;		// [B
+			private final byte[] money 7;		// [B
+			private final byte[] expired 8;		// [B
+			private final Avatar avatar 9;		// Lcom/card/Avatar;
+			private final byte[] backendPublicKey 10;		// [B
+			private final byte[] entryTime 11;		// [B
+			private short backendPublicKeyLen 12;		// S
+			private boolean isInside 13;		// Z
+			private static final short ENCRYPTED_SIZE = 48;		// S
+		}
+
+		.publicMethodTable 1 {
+			equals(Ljava/lang/Object;)Z;
+			setBackendPublicKey([BSS)V;
+			getBackendPublicKey()[B;
+			getBackendPublicKeyLen()S;
+			setId([BSS)V;
+			getId()[B;
+			setIdCard([BSS)V;
+			getIdCard()[B;
+			setFullName([BSS)V;
+			getFullName()[B;
+			setDateOfBirth([BSS)V;
+			getDateOfBirth()[B;
+			setAddress([BSS)V;
+			getAddress()[B;
+			setPhoneNumber([BSS)V;
+			getPhoneNumber()[B;
+			setNumberPlate([BSS)V;
+			getNumberPlate()[B;
+			setMoney([BSS)V;
+			getMoney()[B;
+			setExpired([BSS)V;
+			getExpired()[B;
+			getAvatar()Lcom/card/Avatar;;
+			getIsInside()Z;
+			setIsInside(Z)V;
+			getEntryTime()[B;
+			setEntryTime([BSS)V;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.method public <init>()V 0 {
+			.stack 4;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 67;		// java/lang/Object.<init>()V
+					aload_0;
+					sconst_0;
+					putfield_s 2;		// short com/card/CardModel.backendPublicKeyLen
+					aload_0;
+					bspush 32;
+					newarray 11;
+					putfield_a 3;		// reference com/card/CardModel.id
+					aload_0;
+					bspush 48;
+					newarray 11;
+					putfield_a 4;		// reference com/card/CardModel.idCard
+					aload_0;
+					bspush 48;
+					newarray 11;
+					putfield_a 5;		// reference com/card/CardModel.fullName
+					aload_0;
+					bspush 48;
+					newarray 11;
+					putfield_a 6;		// reference com/card/CardModel.dateofBirth
+					aload_0;
+					bspush 48;
+					newarray 11;
+					putfield_a 7;		// reference com/card/CardModel.address
+					aload_0;
+					bspush 48;
+					newarray 11;
+					putfield_a 8;		// reference com/card/CardModel.phoneNumber
+					aload_0;
+					bspush 48;
+					newarray 11;
+					putfield_a 9;		// reference com/card/CardModel.numberPlate
+					aload_0;
+					bspush 48;
+					newarray 11;
+					putfield_a 10;		// reference com/card/CardModel.money
+					aload_0;
+					bspush 48;
+					newarray 11;
+					putfield_a 11;		// reference com/card/CardModel.expired
+					aload_0;
+					new 124;		// com/card/Avatar
+					dup;
+					sspush 8192;
+					invokespecial 62;		// com/card/Avatar.<init>(S)V
+					putfield_a 12;		// reference com/card/CardModel.avatar
+					aload_0;
+					sspush 200;
+					newarray 11;
+					putfield_a 13;		// reference com/card/CardModel.backendPublicKey
+					aload_0;
+					sconst_0;
+					putfield_b 14;		// boolean com/card/CardModel.isInside
+					aload_0;
+					bspush 8;
+					newarray 11;
+					putfield_a 15;		// reference com/card/CardModel.entryTime
+					getfield_a_this 15;		// reference com/card/CardModel.entryTime
+					sconst_0;
+					bspush 8;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					return;
+		}
+
+		.method public setBackendPublicKey([BSS)V 1 {
+			.stack 5;
+			.locals 0;
+
+				L0:	sload_3;
+					getfield_a_this 13;		// reference com/card/CardModel.backendPublicKey
+					arraylength;
+					if_scmple L2;
+				L1:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					sload_2;
+					getfield_a_this 13;		// reference com/card/CardModel.backendPublicKey
+					sconst_0;
+					sload_3;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_0;
+					sload_3;
+					putfield_s 2;		// short com/card/CardModel.backendPublicKeyLen
+					return;
+		}
+
+		.method public getBackendPublicKey()[B 2 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 13;		// reference com/card/CardModel.backendPublicKey
+					areturn;
+		}
+
+		.method public getBackendPublicKeyLen()S 3 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_s_this 2;		// short com/card/CardModel.backendPublicKeyLen
+					sreturn;
+		}
+
+		.method public setId([BSS)V 4 {
+			.stack 5;
+			.locals 0;
+
+				L0:	sload_3;
+					getfield_a_this 3;		// reference com/card/CardModel.id
+					arraylength;
+					if_scmple L2;
+				L1:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					sload_2;
+					getfield_a_this 3;		// reference com/card/CardModel.id
+					sconst_0;
+					sload_3;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					return;
+		}
+
+		.method public getId()[B 5 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 3;		// reference com/card/CardModel.id
+					areturn;
+		}
+
+		.method public setIdCard([BSS)V 6 {
+			.stack 5;
+			.locals 0;
+
+				L0:	sload_3;
+					bspush 48;
+					if_scmple L2;
+				L1:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					sload_2;
+					getfield_a_this 4;		// reference com/card/CardModel.idCard
+					sconst_0;
+					sload_3;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					return;
+		}
+
+		.method public getIdCard()[B 7 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 4;		// reference com/card/CardModel.idCard
+					areturn;
+		}
+
+		.method public setFullName([BSS)V 8 {
+			.stack 5;
+			.locals 0;
+
+				L0:	sload_3;
+					bspush 48;
+					if_scmple L2;
+				L1:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					sload_2;
+					getfield_a_this 5;		// reference com/card/CardModel.fullName
+					sconst_0;
+					sload_3;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					return;
+		}
+
+		.method public getFullName()[B 9 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 5;		// reference com/card/CardModel.fullName
+					areturn;
+		}
+
+		.method public setDateOfBirth([BSS)V 10 {
+			.stack 5;
+			.locals 0;
+
+				L0:	sload_3;
+					bspush 48;
+					if_scmple L2;
+				L1:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					sload_2;
+					getfield_a_this 6;		// reference com/card/CardModel.dateofBirth
+					sconst_0;
+					sload_3;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					return;
+		}
+
+		.method public getDateOfBirth()[B 11 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 6;		// reference com/card/CardModel.dateofBirth
+					areturn;
+		}
+
+		.method public setAddress([BSS)V 12 {
+			.stack 5;
+			.locals 0;
+
+				L0:	sload_3;
+					bspush 48;
+					if_scmple L2;
+				L1:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					sload_2;
+					getfield_a_this 7;		// reference com/card/CardModel.address
+					sconst_0;
+					sload_3;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					return;
+		}
+
+		.method public getAddress()[B 13 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 7;		// reference com/card/CardModel.address
+					areturn;
+		}
+
+		.method public setPhoneNumber([BSS)V 14 {
+			.stack 5;
+			.locals 0;
+
+				L0:	sload_3;
+					bspush 48;
+					if_scmple L2;
+				L1:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					sload_2;
+					getfield_a_this 8;		// reference com/card/CardModel.phoneNumber
+					sconst_0;
+					sload_3;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					return;
+		}
+
+		.method public getPhoneNumber()[B 15 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 8;		// reference com/card/CardModel.phoneNumber
+					areturn;
+		}
+
+		.method public setNumberPlate([BSS)V 16 {
+			.stack 5;
+			.locals 0;
+
+				L0:	sload_3;
+					bspush 48;
+					if_scmple L2;
+				L1:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					sload_2;
+					getfield_a_this 9;		// reference com/card/CardModel.numberPlate
+					sconst_0;
+					sload_3;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					return;
+		}
+
+		.method public getNumberPlate()[B 17 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 9;		// reference com/card/CardModel.numberPlate
+					areturn;
+		}
+
+		.method public setMoney([BSS)V 18 {
+			.stack 5;
+			.locals 0;
+
+				L0:	sload_3;
+					bspush 48;
+					if_scmple L2;
+				L1:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					sload_2;
+					getfield_a_this 10;		// reference com/card/CardModel.money
+					sconst_0;
+					sload_3;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					return;
+		}
+
+		.method public getMoney()[B 19 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 10;		// reference com/card/CardModel.money
+					areturn;
+		}
+
+		.method public setExpired([BSS)V 20 {
+			.stack 5;
+			.locals 0;
+
+				L0:	sload_3;
+					bspush 48;
+					if_scmple L2;
+				L1:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					sload_2;
+					getfield_a_this 11;		// reference com/card/CardModel.expired
+					sconst_0;
+					sload_3;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					return;
+		}
+
+		.method public getExpired()[B 21 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 11;		// reference com/card/CardModel.expired
+					areturn;
+		}
+
+		.method public getAvatar()Lcom/card/Avatar; 22 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 12;		// reference com/card/CardModel.avatar
+					areturn;
+		}
+
+		.method public getIsInside()Z 23 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_b_this 14;		// boolean com/card/CardModel.isInside
+					sreturn;
+		}
+
+		.method public setIsInside(Z)V 24 {
+			.stack 2;
+			.locals 0;
+
+				L0:	aload_0;
+					sload_1;
+					putfield_b 14;		// boolean com/card/CardModel.isInside
+					return;
+		}
+
+		.method public getEntryTime()[B 25 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 15;		// reference com/card/CardModel.entryTime
+					areturn;
+		}
+
+		.method public setEntryTime([BSS)V 26 {
+			.stack 5;
+			.locals 0;
+
+				L0:	sload_3;
+					bspush 8;
+					if_scmpeq L2;
+				L1:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					sload_2;
+					getfield_a_this 15;		// reference com/card/CardModel.entryTime
+					sconst_0;
+					bspush 8;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					return;
+		}
+
+	}
+
+	.class public PBKDF2 2 extends 0.0 {		// extends java/lang/Object
+
+		.fields {
+			private final 2.11 sha256 0;		// Ljavacard/security/MessageDigest;
+			private final byte[] ipad 1;		// [B
+			private final byte[] opad 2;		// [B
+			private final byte[] innerHash 3;		// [B
+			private final byte[] tempU 4;		// [B
+			private final byte[] tempResult 5;		// [B
+			private final byte[] tempSaltCounter 6;		// [B
+			private static final short BLOCK_SIZE = 64;		// S
+			private static final short HASH_SIZE = 32;		// S
+			private static final short AES_128_KEY_SIZE = 16;		// S
+			private static final short SALT_LEN_DEFAULT = 16;		// S
+		}
+
+		.publicMethodTable 1 {
+			equals(Ljava/lang/Object;)Z;
+			deriveKey([BSS[BSSS[BS)V;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.method public <init>()V 0 {
+			.stack 3;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 67;		// java/lang/Object.<init>()V
+					aload_0;
+					sconst_4;
+					sconst_0;
+					invokestatic 69;		// javacard/security/MessageDigest.getInstance(BZ)Ljavacard/security/MessageDigest;
+					putfield_a 16;		// reference com/card/PBKDF2.sha256
+					aload_0;
+					bspush 64;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 17;		// reference com/card/PBKDF2.ipad
+					aload_0;
+					bspush 64;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 18;		// reference com/card/PBKDF2.opad
+					aload_0;
+					bspush 32;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 19;		// reference com/card/PBKDF2.innerHash
+					aload_0;
+					bspush 32;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 20;		// reference com/card/PBKDF2.tempU
+					aload_0;
+					bspush 32;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 21;		// reference com/card/PBKDF2.tempResult
+					aload_0;
+					bspush 20;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 22;		// reference com/card/PBKDF2.tempSaltCounter
+					return;
+		}
+
+		.method private hmac([BSS[BSS[BS)V {
+			.stack 6;
+			.locals 1;
+
+				L0:	getfield_a_this 16;		// reference com/card/PBKDF2.sha256
+					invokevirtual 70;		// reset()V
+					getfield_a_this 17;		// reference com/card/PBKDF2.ipad
+					sconst_0;
+					bspush 64;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					getfield_a_this 18;		// reference com/card/PBKDF2.opad
+					sconst_0;
+					bspush 64;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					getfield_a_this 19;		// reference com/card/PBKDF2.innerHash
+					sconst_0;
+					bspush 32;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					sload_3;
+					bspush 64;
+					if_scmpgt L2;
+				L1:	aload_1;
+					sload_2;
+					getfield_a_this 17;		// reference com/card/PBKDF2.ipad
+					sconst_0;
+					sload_3;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					aload_1;
+					sload_2;
+					getfield_a_this 18;		// reference com/card/PBKDF2.opad
+					sconst_0;
+					sload_3;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					goto L3;
+				L2:	getfield_a_this 16;		// reference com/card/PBKDF2.sha256
+					invokevirtual 70;		// reset()V
+					getfield_a_this 16;		// reference com/card/PBKDF2.sha256
+					aload_1;
+					sload_2;
+					sload_3;
+					getfield_a_this 17;		// reference com/card/PBKDF2.ipad
+					sconst_0;
+					invokevirtual 80;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 17;		// reference com/card/PBKDF2.ipad
+					sconst_0;
+					getfield_a_this 18;		// reference com/card/PBKDF2.opad
+					sconst_0;
+					bspush 32;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+				L3:	sconst_0;
+					sstore 9;
+				L4:	sload 9;
+					bspush 64;
+					if_scmpge L6;
+				L5:	getfield_a_this 17;		// reference com/card/PBKDF2.ipad
+					sload 9;
+					dup2;
+					baload;
+					bspush 54;
+					sxor;
+					bastore;
+					getfield_a_this 18;		// reference com/card/PBKDF2.opad
+					sload 9;
+					dup2;
+					baload;
+					bspush 92;
+					sxor;
+					bastore;
+					sinc 9 1;
+					goto L4;
+				L6:	getfield_a_this 16;		// reference com/card/PBKDF2.sha256
+					invokevirtual 70;		// reset()V
+					getfield_a_this 16;		// reference com/card/PBKDF2.sha256
+					getfield_a_this 17;		// reference com/card/PBKDF2.ipad
+					sconst_0;
+					bspush 64;
+					invokevirtual 81;		// update([BSS)V
+					getfield_a_this 16;		// reference com/card/PBKDF2.sha256
+					aload 4;
+					sload 5;
+					sload 6;
+					getfield_a_this 19;		// reference com/card/PBKDF2.innerHash
+					sconst_0;
+					invokevirtual 80;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 16;		// reference com/card/PBKDF2.sha256
+					invokevirtual 70;		// reset()V
+					getfield_a_this 16;		// reference com/card/PBKDF2.sha256
+					getfield_a_this 18;		// reference com/card/PBKDF2.opad
+					sconst_0;
+					bspush 64;
+					invokevirtual 81;		// update([BSS)V
+					getfield_a_this 16;		// reference com/card/PBKDF2.sha256
+					getfield_a_this 19;		// reference com/card/PBKDF2.innerHash
+					sconst_0;
+					bspush 32;
+					aload 7;
+					sload 8;
+					invokevirtual 80;		// doFinal([BSS[BS)S
+					pop;
+					return;
+		}
+
+		.method public deriveKey([BSS[BSSS[BS)V 1 {
+			.stack 9;
+			.locals 3;
+
+				L0:	getfield_a_this 20;		// reference com/card/PBKDF2.tempU
+					sconst_0;
+					bspush 32;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					getfield_a_this 21;		// reference com/card/PBKDF2.tempResult
+					sconst_0;
+					bspush 32;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					getfield_a_this 22;		// reference com/card/PBKDF2.tempSaltCounter
+					sconst_0;
+					getfield_a_this 22;		// reference com/card/PBKDF2.tempSaltCounter
+					arraylength;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					aload 4;
+					sload 5;
+					getfield_a_this 22;		// reference com/card/PBKDF2.tempSaltCounter
+					sconst_0;
+					sload 6;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					getfield_a_this 22;		// reference com/card/PBKDF2.tempSaltCounter
+					sload 6;
+					sconst_0;
+					bastore;
+					getfield_a_this 22;		// reference com/card/PBKDF2.tempSaltCounter
+					sload 6;
+					sconst_1;
+					sadd;
+					sconst_0;
+					bastore;
+					getfield_a_this 22;		// reference com/card/PBKDF2.tempSaltCounter
+					sload 6;
+					sconst_2;
+					sadd;
+					sconst_0;
+					bastore;
+					getfield_a_this 22;		// reference com/card/PBKDF2.tempSaltCounter
+					sload 6;
+					sconst_3;
+					sadd;
+					sconst_1;
+					bastore;
+					sload 6;
+					sconst_4;
+					sadd;
+					sstore 10;
+				L1:	aload_0;
+					aload_1;
+					sload_2;
+					sload_3;
+					getfield_a_this 22;		// reference com/card/PBKDF2.tempSaltCounter
+					sconst_0;
+					sload 10;
+					getfield_a_this 20;		// reference com/card/PBKDF2.tempU
+					sconst_0;
+					invokespecial 88;		// com/card/PBKDF2.hmac([BSS[BSS[BS)V
+					getfield_a_this 20;		// reference com/card/PBKDF2.tempU
+					sconst_0;
+					getfield_a_this 21;		// reference com/card/PBKDF2.tempResult
+					sconst_0;
+					bspush 32;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					sconst_1;
+					sstore 11;
+				L2:	sload 11;
+					sload 7;
+					if_scmpge L7;
+				L3:	aload_0;
+					aload_1;
+					sload_2;
+					sload_3;
+					getfield_a_this 20;		// reference com/card/PBKDF2.tempU
+					sconst_0;
+					bspush 32;
+					getfield_a_this 20;		// reference com/card/PBKDF2.tempU
+					sconst_0;
+					invokespecial 88;		// com/card/PBKDF2.hmac([BSS[BSS[BS)V
+					sconst_0;
+					sstore 12;
+				L4:	sload 12;
+					bspush 32;
+					if_scmpge L6;
+				L5:	getfield_a_this 21;		// reference com/card/PBKDF2.tempResult
+					sload 12;
+					dup2;
+					baload;
+					getfield_a_this 20;		// reference com/card/PBKDF2.tempU
+					sload 12;
+					baload;
+					sxor;
+					bastore;
+					sinc 12 1;
+					goto L4;
+				L6:	sinc 11 1;
+					goto L2;
+				L7:	getfield_a_this 21;		// reference com/card/PBKDF2.tempResult
+					sconst_0;
+					aload 8;
+					sload 9;
+					bspush 16;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					return;
+		}
+
+	}
+
+	.class public PIN 3 extends 0.0 {		// extends java/lang/Object
+
+		.fields {
+			private final byte[] pinHash 0;		// [B
+			private final byte[] salt 1;		// [B
+			private final byte[] derivedKey 2;		// [B
+			private final byte[] tempHashBuffer 3;		// [B
+			private final 2.11 messageDigest 4;		// Ljavacard/security/MessageDigest;
+			private final PBKDF2 pbkdf2 5;		// Lcom/card/PBKDF2;
+			private final 2.14 random 6;		// Ljavacard/security/RandomData;
+			private byte tryLimit 7;		// B
+			private byte triesRemaining 8;		// B
+			private boolean isValidated 9;		// Z
+			private static final short SALT_LENGTH = 16;		// S
+			private static final short KEY_LENGTH = 16;		// S
+			private static final short ITERATIONS = 50;		// S
+		}
+
+		.publicMethodTable 1 {
+			equals(Ljava/lang/Object;)Z;
+			match([BSS)Z;
+			update([BSS)V;
+			getKEK()[B;
+			getTriesRemaining()B;
+			resetPin()V;
+			logout()V;
+			getSalt()[B;
+			reset()V;
+			isValidated()Z;
+			check([BSS)Z;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.method public <init>([BSSBLcom/card/PBKDF2;)V 0 {
+			.stack 6;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 67;		// java/lang/Object.<init>()V
+					aload_0;
+					bspush 32;
+					newarray 11;
+					putfield_a 23;		// reference com/card/PIN.pinHash
+					aload_0;
+					bspush 16;
+					newarray 11;
+					putfield_a 24;		// reference com/card/PIN.salt
+					aload_0;
+					bspush 16;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 25;		// reference com/card/PIN.derivedKey
+					aload_0;
+					bspush 32;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 26;		// reference com/card/PIN.tempHashBuffer
+					aload_0;
+					sload 4;
+					putfield_b 27;		// byte com/card/PIN.tryLimit
+					aload_0;
+					sload 4;
+					putfield_b 28;		// byte com/card/PIN.triesRemaining
+					aload_0;
+					sconst_0;
+					putfield_b 29;		// boolean com/card/PIN.isValidated
+					aload_0;
+					sconst_4;
+					sconst_0;
+					invokestatic 69;		// javacard/security/MessageDigest.getInstance(BZ)Ljavacard/security/MessageDigest;
+					putfield_a 30;		// reference com/card/PIN.messageDigest
+					aload_0;
+					aload 5;
+					putfield_a 31;		// reference com/card/PIN.pbkdf2
+					aload_0;
+					sconst_2;
+					invokestatic 71;		// javacard/security/RandomData.getInstance(B)Ljavacard/security/RandomData;
+					putfield_a 32;		// reference com/card/PIN.random
+					getfield_a_this 32;		// reference com/card/PIN.random
+					getfield_a_this 24;		// reference com/card/PIN.salt
+					sconst_0;
+					bspush 16;
+					invokevirtual 73;		// generateData([BSS)V
+					getfield_a_this 30;		// reference com/card/PIN.messageDigest
+					aload_1;
+					sload_2;
+					sload_3;
+					getfield_a_this 23;		// reference com/card/PIN.pinHash
+					sconst_0;
+					invokevirtual 80;		// doFinal([BSS[BS)S
+					pop;
+					aload_0;
+					aload_1;
+					sload_2;
+					sload_3;
+					invokespecial 74;		// com/card/PIN.computeKEK([BSS)V
+					return;
+		}
+
+		.method private computeKEK([BSS)V {
+			.stack 10;
+			.locals 0;
+
+				L0:	getfield_a_this 31;		// reference com/card/PIN.pbkdf2
+					aload_1;
+					sload_2;
+					sload_3;
+					getfield_a_this 24;		// reference com/card/PIN.salt
+					sconst_0;
+					bspush 16;
+					bspush 50;
+					getfield_a_this 25;		// reference com/card/PIN.derivedKey
+					sconst_0;
+					invokevirtual 75;		// deriveKey([BSS[BSSS[BS)V
+					return;
+		}
+
+		.method public match([BSS)Z 1 {
+			.stack 6;
+			.locals 0;
+
+				L0:	getfield_b_this 28;		// byte com/card/PIN.triesRemaining
+					ifne L2;
+				L1:	sconst_0;
+					sreturn;
+				L2:	getfield_a_this 30;		// reference com/card/PIN.messageDigest
+					invokevirtual 70;		// reset()V
+					getfield_a_this 30;		// reference com/card/PIN.messageDigest
+					aload_1;
+					sload_2;
+					sload_3;
+					getfield_a_this 26;		// reference com/card/PIN.tempHashBuffer
+					sconst_0;
+					invokevirtual 80;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 23;		// reference com/card/PIN.pinHash
+					sconst_0;
+					getfield_a_this 26;		// reference com/card/PIN.tempHashBuffer
+					sconst_0;
+					getfield_a_this 23;		// reference com/card/PIN.pinHash
+					arraylength;
+					invokestatic 77;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifeq L4;
+				L3:	aload_0;
+					dup;
+					getfield_b 28;		// byte com/card/PIN.triesRemaining
+					sconst_1;
+					ssub;
+					s2b;
+					putfield_b 28;		// byte com/card/PIN.triesRemaining
+					sconst_0;
+					sreturn;
+				L4:	aload_0;
+					getfield_b_this 27;		// byte com/card/PIN.tryLimit
+					putfield_b 28;		// byte com/card/PIN.triesRemaining
+					aload_0;
+					sconst_1;
+					putfield_b 29;		// boolean com/card/PIN.isValidated
+					aload_0;
+					aload_1;
+					sload_2;
+					sload_3;
+					invokespecial 74;		// com/card/PIN.computeKEK([BSS)V
+					sconst_1;
+					sreturn;
+		}
+
+		.method public update([BSS)V 2 {
+			.stack 6;
+			.locals 0;
+
+				L0:	sload_3;
+					sconst_1;
+					if_scmpge L2;
+				L1:	sspush 27012;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	getfield_a_this 30;		// reference com/card/PIN.messageDigest
+					invokevirtual 70;		// reset()V
+					getfield_a_this 30;		// reference com/card/PIN.messageDigest
+					aload_1;
+					sload_2;
+					sload_3;
+					getfield_a_this 23;		// reference com/card/PIN.pinHash
+					sconst_0;
+					invokevirtual 80;		// doFinal([BSS[BS)S
+					pop;
+					aload_0;
+					aload_1;
+					sload_2;
+					sload_3;
+					invokespecial 74;		// com/card/PIN.computeKEK([BSS)V
+					aload_0;
+					getfield_b_this 27;		// byte com/card/PIN.tryLimit
+					putfield_b 28;		// byte com/card/PIN.triesRemaining
+					return;
+		}
+
+		.method public getKEK()[B 3 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 25;		// reference com/card/PIN.derivedKey
+					areturn;
+		}
+
+		.method public getTriesRemaining()B 4 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_b_this 28;		// byte com/card/PIN.triesRemaining
+					sreturn;
+		}
+
+		.method public resetPin()V 5 {
+			.stack 4;
+			.locals 0;
+
+				L0:	aload_0;
+					getfield_b_this 27;		// byte com/card/PIN.tryLimit
+					putfield_b 28;		// byte com/card/PIN.triesRemaining
+					aload_0;
+					sconst_0;
+					putfield_b 29;		// boolean com/card/PIN.isValidated
+					getfield_a_this 25;		// reference com/card/PIN.derivedKey
+					sconst_0;
+					bspush 16;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					return;
+		}
+
+		.method public logout()V 6 {
+			.stack 4;
+			.locals 0;
+
+				L0:	aload_0;
+					sconst_0;
+					putfield_b 29;		// boolean com/card/PIN.isValidated
+					getfield_a_this 25;		// reference com/card/PIN.derivedKey
+					sconst_0;
+					bspush 16;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					return;
+		}
+
+		.method public getSalt()[B 7 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_a_this 24;		// reference com/card/PIN.salt
+					areturn;
+		}
+
+		.method public reset()V 8 {
+			.stack 1;
+			.locals 0;
+
+				L0:	aload_0;
+					invokevirtual 78;		// resetPin()V
+					return;
+		}
+
+		.method public isValidated()Z 9 {
+			.stack 1;
+			.locals 0;
+
+				L0:	getfield_b_this 29;		// boolean com/card/PIN.isValidated
+					sreturn;
+		}
+
+		.method public check([BSS)Z 10 {
+			.stack 6;
+			.locals 0;
+
+				L0:	getfield_a_this 30;		// reference com/card/PIN.messageDigest
+					invokevirtual 70;		// reset()V
+					getfield_a_this 30;		// reference com/card/PIN.messageDigest
+					aload_1;
+					sload_2;
+					sload_3;
+					getfield_a_this 26;		// reference com/card/PIN.tempHashBuffer
+					sconst_0;
+					invokevirtual 80;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 23;		// reference com/card/PIN.pinHash
+					sconst_0;
+					getfield_a_this 26;		// reference com/card/PIN.tempHashBuffer
+					sconst_0;
+					getfield_a_this 23;		// reference com/card/PIN.pinHash
+					arraylength;
+					invokestatic 77;		// javacard/framework/Util.arrayCompare([BS[BSS)B
+					ifne L2;
+				L1:	sconst_1;
+					sreturn;
+				L2:	sconst_0;
+					sreturn;
+		}
+
+	}
+
+	.class public ParkingCard 4 extends 1.3 {		// extends javacard/framework/Applet
+
+		.fields {
+			private PIN systemSecret 0;		// Lcom/card/PIN;
+			private PBKDF2 pbkdf2Engine 1;		// Lcom/card/PBKDF2;
+			private final byte[] vehicle 2;		// [B
+			private PIN pin 3;		// Lcom/card/PIN;
+			private CardModel cardModel 4;		// Lcom/card/CardModel;
+			private 2.20 masterKeyObj 5;		// Ljavacard/security/AESKey;
+			private 2.20 wrappingKeyObj 6;		// Ljavacard/security/AESKey;
+			private 2.20 transportKeyObj 7;		// Ljavacard/security/AESKey;
+			private 2.14 rng 8;		// Ljavacard/security/RandomData;
+			private byte[] masterKeyRAM 9;		// [B
+			private byte[] encryptedMasterKey_User 10;		// [B
+			private byte[] encryptedMasterKey_Admin 11;		// [B
+			private byte[] encryptedPrivateKeyExp 12;		// [B
+			private final 4.1 cipherData 13;		// Ljavacardx/crypto/Cipher;
+			private final 4.1 cipherWrap 14;		// Ljavacardx/crypto/Cipher;
+			private final byte[] temporary 15;		// [B
+			private final byte[] cipherBuffer 16;		// [B
+			private final byte[] iv 17;		// [B
+			private 2.9 cachedBackendPubKey 18;		// Ljavacard/security/RSAPublicKey;
+			private 2.15 cachedSigVerify 19;		// Ljavacard/security/Signature;
+			private 2.15 signature 20;		// Ljavacard/security/Signature;
+			private final byte[] signatureBuffer 21;		// [B
+			private 2.8 privateKey 22;		// Ljavacard/security/RSAPrivateKey;
+			private 2.9 publicKey 23;		// Ljavacard/security/RSAPublicKey;
+			private final byte[] tempMessage 24;		// [B
+			private final byte[] tempSignature 25;		// [B
+			private final byte[] tempPinData 26;		// [B
+			private boolean isSecretValidated 27;		// Z
+			public static final byte NUMBER_RETRY = 5;		// B
+			public static final byte ROLE_ADMIN = 1;		// B
+			public static final short SW_PIN_SAME_AS_OLD = 27264;		// S
+			public static final short MAX_SIZE_AVATAR = 8192;		// S
+			public static final short ENCRYPTED_INFO_SIZE = 48;		// S
+			private static final byte[] TRANSPORT_KEY_DATA = {75,101,121,66,97,111,77,97,116,80,105,110,50,48,50,54};		// [B
+			static final byte INS_VERIFY_PIN = 0;		// B
+			static final byte INS_CREATE_PIN = 1;		// B
+			static final byte INS_CREATE_INFO = 2;		// B
+			static final byte INS_UPDATE_PIN = 3;		// B
+			static final byte INS_UPDATE_INFO = 4;		// B
+			static final byte INS_GET_INFO = 5;		// B
+			static final byte INS_UPDATE_MONEY = 6;		// B
+			static final byte INS_GET_MONEY = 7;		// B
+			static final byte INS_UPDATE_EXPIRED = 8;		// B
+			static final byte INS_RESET_PIN = 9;		// B
+			static final byte INS_VERIFY_SECRET = 10;		// B
+			static final byte INS_UPDATE_AVATAR = 16;		// B
+			static final byte INS_GET_AVATAR = 17;		// B
+			static final byte INS_CREATE_SIGNATURE = 18;		// B
+			static final byte INS_GET_VEHICLE = 20;		// B
+			static final byte INS_UPDATE_VEHICLE = 21;		// B
+			static final byte INS_SET_BACKEND_PUBLIC_KEY = 22;		// B
+			static final byte INS_GET_CARD_ID = 23;		// B
+			static final byte INS_GET_DB_ID = 24;		// B
+			static final byte INS_ENTRY_GATE = 32;		// B
+			static final byte INS_EXIT_GATE = 33;		// B
+			static final byte INS_GET_ENTRY_STATE = 34;		// B
+			static final byte INS_GET_INFO_NO = 35;		// B
+			static final byte INS_GET_PIN_TRIES = 36;		// B
+			static final byte INS_UPDATE_PIN_DIRECT = 37;		// B
+			static final byte INS_UPDATE_MONEY_DIRECT = 38;		// B
+			static final byte INS_CHECK_EMPTY = 39;		// B
+			static final byte INS_CHECK_VALIDITY = 48;		// B
+		}
+
+		.publicMethodTable 4 {
+			equals(Ljava/lang/Object;)Z;
+			register()V;
+			register([BSB)V;
+			selectingApplet()Z;
+			deselect()V;
+			getShareableInterfaceObject(Ljavacard/framework/AID;B)Ljavacard/framework/Shareable;;
+			select()Z;
+			process(Ljavacard/framework/APDU;)V;
+			generateKeyPair()Ljavacard/security/KeyPair;;
+			serializePublicKey(Ljavacard/security/RSAPublicKey;[BS)S;
+		}
+
+		.packageMethodTable 0 {
+		}
+
+		.implementedInterfaceInfoTable { 
+			.interface 3.0 { 		// javacardx/apdu/ExtendedLength
+			}
+
+		}
+
+		.method public <init>()V 0 {
+			.stack 4;
+			.locals 0;
+
+				L0:	aload_0;
+					invokespecial 79;		// javacard/framework/Applet.<init>()V
+					aload_0;
+					aconst_null;
+					putfield_a 33;		// reference com/card/ParkingCard.cachedBackendPubKey
+					aload_0;
+					aconst_null;
+					putfield_a 34;		// reference com/card/ParkingCard.cachedSigVerify
+					aload_0;
+					new 82;		// com/card/PBKDF2
+					dup;
+					invokespecial 86;		// com/card/PBKDF2.<init>()V
+					putfield_a 35;		// reference com/card/ParkingCard.pbkdf2Engine
+					aload_0;
+					sconst_2;
+					invokestatic 71;		// javacard/security/RandomData.getInstance(B)Ljavacard/security/RandomData;
+					putfield_a 36;		// reference com/card/ParkingCard.rng
+					aload_0;
+					bspush 15;
+					sspush 128;
+					sconst_0;
+					invokestatic 157;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+					checkcast 0 160;		// T_CLASSORINTERFACE javacard/security/AESKey
+					putfield_a 37;		// reference com/card/ParkingCard.masterKeyObj
+					aload_0;
+					bspush 15;
+					sspush 128;
+					sconst_0;
+					invokestatic 157;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+					checkcast 0 160;		// T_CLASSORINTERFACE javacard/security/AESKey
+					putfield_a 38;		// reference com/card/ParkingCard.wrappingKeyObj
+					aload_0;
+					bspush 15;
+					sspush 128;
+					sconst_0;
+					invokestatic 157;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+					checkcast 0 160;		// T_CLASSORINTERFACE javacard/security/AESKey
+					putfield_a 39;		// reference com/card/ParkingCard.transportKeyObj
+					getfield_a_this 39;		// reference com/card/ParkingCard.transportKeyObj
+					getstatic_a 64;		// reference com/card/ParkingCard.TRANSPORT_KEY_DATA
+					sconst_0;
+					invokeinterface 3 160 4;		// javacard/security/AESKey
+					aload_0;
+					bspush 13;
+					sconst_0;
+					invokestatic 65;		// javacardx/crypto/Cipher.getInstance(BZ)Ljavacardx/crypto/Cipher;
+					putfield_a 40;		// reference com/card/ParkingCard.cipherData
+					aload_0;
+					bspush 14;
+					sconst_0;
+					invokestatic 65;		// javacardx/crypto/Cipher.getInstance(BZ)Ljavacardx/crypto/Cipher;
+					putfield_a 41;		// reference com/card/ParkingCard.cipherWrap
+					aload_0;
+					bspush 16;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 42;		// reference com/card/ParkingCard.masterKeyRAM
+					aload_0;
+					bspush 16;
+					newarray 11;
+					putfield_a 43;		// reference com/card/ParkingCard.encryptedMasterKey_User
+					aload_0;
+					bspush 16;
+					newarray 11;
+					putfield_a 44;		// reference com/card/ParkingCard.encryptedMasterKey_Admin
+					aload_0;
+					sspush 128;
+					newarray 11;
+					putfield_a 45;		// reference com/card/ParkingCard.encryptedPrivateKeyExp
+					aload_0;
+					bspush 64;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 46;		// reference com/card/ParkingCard.temporary
+					aload_0;
+					bspush 64;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 47;		// reference com/card/ParkingCard.cipherBuffer
+					aload_0;
+					bspush 16;
+					newarray 11;
+					putfield_a 48;		// reference com/card/ParkingCard.iv
+					getfield_a_this 48;		// reference com/card/ParkingCard.iv
+					sconst_0;
+					bspush 16;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					aload_0;
+					bspush 16;
+					newarray 11;
+					putfield_a 49;		// reference com/card/ParkingCard.vehicle
+					aload_0;
+					bspush 10;
+					sconst_0;
+					invokestatic 76;		// javacard/security/Signature.getInstance(BZ)Ljavacard/security/Signature;
+					putfield_a 50;		// reference com/card/ParkingCard.signature
+					aload_0;
+					sspush 128;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 51;		// reference com/card/ParkingCard.signatureBuffer
+					aload_0;
+					sspush 256;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 52;		// reference com/card/ParkingCard.tempMessage
+					aload_0;
+					sspush 128;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 53;		// reference com/card/ParkingCard.tempSignature
+					aload_0;
+					bspush 32;
+					sconst_1;
+					invokestatic 61;		// javacard/framework/JCSystem.makeTransientByteArray(SB)[B
+					putfield_a 54;		// reference com/card/ParkingCard.tempPinData
+					aload_0;
+					sconst_0;
+					putfield_b 55;		// boolean com/card/ParkingCard.isSecretValidated
+					return;
+		}
+
+		.method public static install([BSB)V 1 {
+			.stack 5;
+			.locals 0;
+
+				L0:	new 83;		// com/card/ParkingCard
+					dup;
+					invokespecial 84;		// com/card/ParkingCard.<init>()V
+					aload_0;
+					sload_1;
+					sconst_1;
+					sadd;
+					aload_0;
+					sload_1;
+					baload;
+					invokevirtual 85;		// register([BSB)V
+					return;
+		}
+
+		.method public deselect()V 4 {
+			.stack 2;
+			.locals 0;
+
+				L0:	getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					ifnull L2;
+				L1:	getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					invokevirtual 87;		// logout()V
+				L2:	getfield_a_this 57;		// reference com/card/ParkingCard.systemSecret
+					ifnull L4;
+				L3:	getfield_a_this 57;		// reference com/card/ParkingCard.systemSecret
+					invokevirtual 89;		// reset()V
+				L4:	aload_0;
+					sconst_0;
+					putfield_b 55;		// boolean com/card/ParkingCard.isSecretValidated
+					aload_0;
+					invokespecial 90;		// com/card/ParkingCard.clearSession()V
+					return;
+		}
+
+		.method public process(Ljavacard/framework/APDU;)V 7 {
+			.stack 2;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_0;
+					invokevirtual 91;		// selectingApplet()Z
+					ifeq L2;
+				L1:	aload_0;
+					invokespecial 90;		// com/card/ParkingCard.clearSession()V
+					return;
+				L2:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L3:	aload_2;
+					sconst_1;
+					baload;
+					stableswitch L36 0 48 L6 L5 L10 L7 L16 L11 L17 L18 L19 L8 L4 L36 L36 L36 L36 L36 L22 L21 L23 L36 L24 L25 L26 L27 L28 L36 L36 L36 L36 L36 L36 L36 L29 L30 L31 L32 L33 L9 L20 L34 L36 L36 L36 L36 L36 L36 L36 L36 L35;
+				L4:	aload_0;
+					aload_1;
+					invokespecial 93;		// com/card/ParkingCard.verifySecret(Ljavacard/framework/APDU;)V
+					goto_w L37;
+				L5:	aload_0;
+					aload_1;
+					invokespecial 94;		// com/card/ParkingCard.createPIN(Ljavacard/framework/APDU;)V
+					goto_w L37;
+				L6:	aload_0;
+					aload_1;
+					invokespecial 95;		// com/card/ParkingCard.verifyPIN(Ljavacard/framework/APDU;)V
+					goto_w L37;
+				L7:	aload_0;
+					aload_1;
+					invokespecial 96;		// com/card/ParkingCard.updatePIN(Ljavacard/framework/APDU;)V
+					goto_w L37;
+				L8:	aload_0;
+					aload_1;
+					invokespecial 97;		// com/card/ParkingCard.resetPIN(Ljavacard/framework/APDU;)V
+					goto_w L37;
+				L9:	aload_0;
+					aload_1;
+					invokespecial 98;		// com/card/ParkingCard.updatePINDirect(Ljavacard/framework/APDU;)V
+					goto_w L37;
+				L10:	aload_0;
+					aload_1;
+					invokespecial 99;		// com/card/ParkingCard.createCard(Ljavacard/framework/APDU;)V
+					goto_w L37;
+				L11:	getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					ifnull L13;
+				L12:	getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					invokevirtual 100;		// isValidated()Z
+					ifne L15;
+				L13:	getfield_b_this 55;		// boolean com/card/ParkingCard.isSecretValidated
+					ifne L15;
+				L14:	sspush 27010;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L15:	aload_0;
+					aload_1;
+					invokespecial 101;		// com/card/ParkingCard.getCard(Ljavacard/framework/APDU;)V
+					goto_w L37;
+				L16:	aload_0;
+					aload_1;
+					invokespecial 102;		// com/card/ParkingCard.updateInfo(Ljavacard/framework/APDU;)V
+					goto_w L37;
+				L17:	aload_0;
+					aload_1;
+					invokespecial 103;		// com/card/ParkingCard.updateMoney(Ljavacard/framework/APDU;)V
+					goto_w L37;
+				L18:	aload_0;
+					aload_1;
+					invokespecial 104;		// com/card/ParkingCard.getMoney(Ljavacard/framework/APDU;)V
+					goto L37;
+				L19:	aload_0;
+					aload_1;
+					invokespecial 105;		// com/card/ParkingCard.updateExpired(Ljavacard/framework/APDU;)V
+					goto L37;
+				L20:	aload_0;
+					aload_1;
+					invokespecial 106;		// com/card/ParkingCard.updateMoneyDirect(Ljavacard/framework/APDU;)V
+					goto L37;
+				L21:	aload_0;
+					aload_1;
+					invokespecial 107;		// com/card/ParkingCard.getAvatar(Ljavacard/framework/APDU;)V
+					goto L37;
+				L22:	aload_0;
+					aload_1;
+					invokespecial 108;		// com/card/ParkingCard.updateAvatar(Ljavacard/framework/APDU;)V
+					goto L37;
+				L23:	aload_0;
+					aload_1;
+					invokespecial 109;		// com/card/ParkingCard.createSignature(Ljavacard/framework/APDU;)V
+					goto L37;
+				L24:	aload_0;
+					aload_1;
+					invokespecial 110;		// com/card/ParkingCard.getVehicle(Ljavacard/framework/APDU;)V
+					goto L37;
+				L25:	aload_0;
+					aload_1;
+					invokespecial 111;		// com/card/ParkingCard.updateVehicle(Ljavacard/framework/APDU;)V
+					goto L37;
+				L26:	aload_0;
+					aload_1;
+					invokespecial 112;		// com/card/ParkingCard.setBackendPublicKey(Ljavacard/framework/APDU;)V
+					goto L37;
+				L27:	aload_0;
+					aload_1;
+					invokespecial 113;		// com/card/ParkingCard.getCardId(Ljavacard/framework/APDU;)V
+					goto L37;
+				L28:	aload_0;
+					aload_1;
+					invokespecial 114;		// com/card/ParkingCard.getDbId(Ljavacard/framework/APDU;)V
+					goto L37;
+				L29:	aload_0;
+					aload_1;
+					invokespecial 115;		// com/card/ParkingCard.entryGate(Ljavacard/framework/APDU;)V
+					goto L37;
+				L30:	aload_0;
+					aload_1;
+					invokespecial 116;		// com/card/ParkingCard.exitGate(Ljavacard/framework/APDU;)V
+					goto L37;
+				L31:	aload_0;
+					aload_1;
+					invokespecial 117;		// com/card/ParkingCard.getEntryState(Ljavacard/framework/APDU;)V
+					goto L37;
+				L32:	aload_0;
+					aload_1;
+					invokespecial 118;		// com/card/ParkingCard.getCardNO(Ljavacard/framework/APDU;)V
+					goto L37;
+				L33:	aload_0;
+					aload_1;
+					invokespecial 119;		// com/card/ParkingCard.getPinTries(Ljavacard/framework/APDU;)V
+					goto L37;
+				L34:	aload_0;
+					aload_1;
+					invokespecial 120;		// com/card/ParkingCard.checkEmpty(Ljavacard/framework/APDU;)V
+					goto L37;
+				L35:	aload_0;
+					aload_1;
+					invokespecial 121;		// com/card/ParkingCard.checkValidity(Ljavacard/framework/APDU;)V
+					goto L37;
+				L36:	sspush 27904;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L37:	return;
+		}
+
+		.method private decryptTransportData([BS[BS)S {
+			.stack 6;
+			.locals 1;
+
+				L0:	getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 39;		// reference com/card/ParkingCard.transportKeyObj
+					sconst_1;
+					invokevirtual 122;		// init(Ljavacard/security/Key;B)V
+					getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					aload_1;
+					sload_2;
+					bspush 16;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokevirtual 123;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					baload;
+					sspush 255;
+					sand;
+					sstore 5;
+				L1:	sload 5;
+					ifle L3;
+				L2:	sload 5;
+					bspush 15;
+					if_scmple L4;
+				L3:	sspush 27012;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_1;
+					aload_3;
+					sload 4;
+					sload 5;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					sload 5;
+					sreturn;
+		}
+
+		.method private checkEmpty(Ljavacard/framework/APDU;)V {
+			.stack 3;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_2;
+					sconst_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnonnull L3;
+				L2:	sconst_1;
+					goto L4;
+				L3:	sconst_0;
+				L4:	bastore;
+					aload_1;
+					sconst_0;
+					sconst_1;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private checkValidity(Ljavacard/framework/APDU;)V {
+			.stack 5;
+			.locals 3;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnonnull L2;
+				L1:	sspush 27013;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L3:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 126;		// getExpired()[B
+					astore_3;
+				L4:	aload_3;
+					arraylength;
+					sstore 4;
+				L5:	sload 4;
+					ifle L7;
+				L6:	aload_3;
+					sconst_0;
+					aload_2;
+					sconst_0;
+					sload 4;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					goto L8;
+				L7:	aload_2;
+					sconst_0;
+					bspush 32;
+					bastore;
+					sconst_1;
+					sstore 4;
+				L8:	aload_1;
+					sconst_0;
+					sload 4;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private verifySecret(Ljavacard/framework/APDU;)V {
+			.stack 5;
+			.locals 4;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	sload_3;
+					bspush 16;
+					if_scmpeq L4;
+				L3:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	getfield_a_this 57;		// reference com/card/ParkingCard.systemSecret
+					ifnonnull L6;
+				L5:	sspush 27013;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L6:	aload_0;
+					aload_2;
+					sconst_5;
+					getfield_a_this 54;		// reference com/card/ParkingCard.tempPinData
+					sconst_0;
+					invokespecial 129;		// com/card/ParkingCard.decryptTransportData([BS[BS)S
+					sstore 4;
+				L7:	getfield_a_this 57;		// reference com/card/ParkingCard.systemSecret
+					getfield_a_this 54;		// reference com/card/ParkingCard.tempPinData
+					sconst_0;
+					sload 4;
+					s2b;
+					invokevirtual 130;		// match([BSS)Z
+					ifne L9;
+				L8:	sspush 27010;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L9:	aload_0;
+					sconst_1;
+					putfield_b 55;		// boolean com/card/ParkingCard.isSecretValidated
+				L10:	aload_0;
+					getfield_a_this 57;		// reference com/card/ParkingCard.systemSecret
+					invokevirtual 131;		// getKEK()[B
+					getfield_a_this 44;		// reference com/card/ParkingCard.encryptedMasterKey_Admin
+					invokespecial 132;		// com/card/ParkingCard.restoreMasterKeyFromSlot([B[B)V
+				L11:	goto L14;
+				L12:	astore 5;
+				L13:	aload_0;
+					sconst_0;
+					putfield_b 55;		// boolean com/card/ParkingCard.isSecretValidated
+					sspush 27012;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L14:	return;
+			.exceptionTable {
+				// start_block end_block handler_block catch_type_index
+				L10 L11 L12 127;
+			}
+		}
+
+		.method private createPIN(Ljavacard/framework/APDU;)V {
+			.stack 8;
+			.locals 5;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	sload_3;
+					bspush 32;
+					if_scmpeq L4;
+				L3:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	sconst_5;
+					sstore 4;
+				L5:	aload_0;
+					aload_2;
+					sload 4;
+					getfield_a_this 54;		// reference com/card/ParkingCard.tempPinData
+					sconst_0;
+					invokespecial 129;		// com/card/ParkingCard.decryptTransportData([BS[BS)S
+					sstore 5;
+				L6:	sinc 4 16;
+					sload 5;
+					bspush 32;
+					if_scmpgt L8;
+				L7:	sload 5;
+					ifge L9;
+				L8:	sspush 27012;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L9:	aload_0;
+					new 133;		// com/card/PIN
+					dup;
+					getfield_a_this 54;		// reference com/card/ParkingCard.tempPinData
+					sconst_0;
+					sload 5;
+					sconst_5;
+					getfield_a_this 35;		// reference com/card/ParkingCard.pbkdf2Engine
+					invokespecial 134;		// com/card/PIN.<init>([BSSBLcom/card/PBKDF2;)V
+					putfield_a 56;		// reference com/card/ParkingCard.pin
+					aload_0;
+					aload_2;
+					sload 4;
+					getfield_a_this 54;		// reference com/card/ParkingCard.tempPinData
+					sconst_0;
+					invokespecial 129;		// com/card/ParkingCard.decryptTransportData([BS[BS)S
+					sstore 6;
+				L10:	sinc 4 16;
+					sload 6;
+					bspush 16;
+					if_scmpgt L12;
+				L11:	sload 6;
+					ifgt L13;
+				L12:	sspush 27012;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L13:	aload_0;
+					new 133;		// com/card/PIN
+					dup;
+					getfield_a_this 54;		// reference com/card/ParkingCard.tempPinData
+					sconst_0;
+					sload 6;
+					sconst_3;
+					getfield_a_this 35;		// reference com/card/ParkingCard.pbkdf2Engine
+					invokespecial 134;		// com/card/PIN.<init>([BSSBLcom/card/PBKDF2;)V
+					putfield_a 57;		// reference com/card/ParkingCard.systemSecret
+					aload_0;
+					getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					invokevirtual 131;		// getKEK()[B
+					invokespecial 135;		// com/card/ParkingCard.generateAndBackupMasterKey([B)V
+					return;
+		}
+
+		.method private updatePINDirect(Ljavacard/framework/APDU;)V {
+			.stack 5;
+			.locals 3;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	sload_3;
+					bspush 16;
+					if_scmpeq L4;
+				L3:	sspush 27012;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					invokeinterface 1 160 3;		// javacard/security/AESKey
+					ifne L6;
+				L5:	sspush 27013;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L6:	aload_0;
+					aload_2;
+					sconst_5;
+					getfield_a_this 54;		// reference com/card/ParkingCard.tempPinData
+					sconst_0;
+					invokespecial 129;		// com/card/ParkingCard.decryptTransportData([BS[BS)S
+					sstore 4;
+				L7:	getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					getfield_a_this 54;		// reference com/card/ParkingCard.tempPinData
+					sconst_0;
+					sload 4;
+					s2b;
+					invokevirtual 136;		// check([BSS)Z
+					ifeq L9;
+				L8:	sspush 27264;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L9:	getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					getfield_a_this 54;		// reference com/card/ParkingCard.tempPinData
+					sconst_0;
+					sload 4;
+					s2b;
+					invokevirtual 137;		// update([BSS)V
+					aload_0;
+					getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					invokevirtual 131;		// getKEK()[B
+					getfield_a_this 43;		// reference com/card/ParkingCard.encryptedMasterKey_User
+					invokespecial 138;		// com/card/ParkingCard.saveMasterKeyToSlot([B[B)V
+					return;
+		}
+
+		.method private generateAndBackupMasterKey([B)V {
+			.stack 4;
+			.locals 0;
+
+				L0:	getfield_a_this 36;		// reference com/card/ParkingCard.rng
+					getfield_a_this 42;		// reference com/card/ParkingCard.masterKeyRAM
+					sconst_0;
+					bspush 16;
+					invokevirtual 73;		// generateData([BSS)V
+					getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					getfield_a_this 42;		// reference com/card/ParkingCard.masterKeyRAM
+					sconst_0;
+					invokeinterface 3 160 4;		// javacard/security/AESKey
+					aload_0;
+					aload_1;
+					getfield_a_this 43;		// reference com/card/ParkingCard.encryptedMasterKey_User
+					invokespecial 138;		// com/card/ParkingCard.saveMasterKeyToSlot([B[B)V
+					aload_0;
+					getfield_a_this 57;		// reference com/card/ParkingCard.systemSecret
+					invokevirtual 131;		// getKEK()[B
+					getfield_a_this 44;		// reference com/card/ParkingCard.encryptedMasterKey_Admin
+					invokespecial 138;		// com/card/ParkingCard.saveMasterKeyToSlot([B[B)V
+					return;
+		}
+
+		.method private saveMasterKeyToSlot([B[B)V {
+			.stack 6;
+			.locals 0;
+
+				L0:	getfield_a_this 38;		// reference com/card/ParkingCard.wrappingKeyObj
+					aload_1;
+					sconst_0;
+					invokeinterface 3 160 4;		// javacard/security/AESKey
+					getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 38;		// reference com/card/ParkingCard.wrappingKeyObj
+					sconst_2;
+					invokevirtual 122;		// init(Ljavacard/security/Key;B)V
+					getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 42;		// reference com/card/ParkingCard.masterKeyRAM
+					sconst_0;
+					bspush 16;
+					aload_2;
+					sconst_0;
+					invokevirtual 123;		// doFinal([BSS[BS)S
+					pop;
+					return;
+		}
+
+		.method private restoreMasterKeyFromSlot([B[B)V {
+			.stack 6;
+			.locals 0;
+
+				L0:	getfield_a_this 38;		// reference com/card/ParkingCard.wrappingKeyObj
+					aload_1;
+					sconst_0;
+					invokeinterface 3 160 4;		// javacard/security/AESKey
+					getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 38;		// reference com/card/ParkingCard.wrappingKeyObj
+					sconst_1;
+					invokevirtual 122;		// init(Ljavacard/security/Key;B)V
+					getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					aload_2;
+					sconst_0;
+					bspush 16;
+					getfield_a_this 42;		// reference com/card/ParkingCard.masterKeyRAM
+					sconst_0;
+					invokevirtual 123;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					getfield_a_this 42;		// reference com/card/ParkingCard.masterKeyRAM
+					sconst_0;
+					invokeinterface 3 160 4;		// javacard/security/AESKey
+					return;
+		}
+
+		.method private clearSession()V {
+			.stack 4;
+			.locals 0;
+
+				L0:	getfield_a_this 42;		// reference com/card/ParkingCard.masterKeyRAM
+					sconst_0;
+					bspush 16;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					invokeinterface 1 160 0;		// javacard/security/AESKey
+					return;
+		}
+
+		.method private encryptInfo([BSS[BS)V {
+			.stack 7;
+			.locals 0;
+
+				L0:	getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					invokeinterface 1 160 3;		// javacard/security/AESKey
+					ifne L2;
+				L1:	sspush 27013;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	sload_3;
+					bspush 32;
+					if_scmple L4;
+				L3:	sspush 27012;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	getfield_a_this 36;		// reference com/card/ParkingCard.rng
+					getfield_a_this 48;		// reference com/card/ParkingCard.iv
+					sconst_0;
+					bspush 16;
+					invokevirtual 73;		// generateData([BSS)V
+					getfield_a_this 48;		// reference com/card/ParkingCard.iv
+					sconst_0;
+					aload 4;
+					sload 5;
+					bspush 16;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					getfield_a_this 47;		// reference com/card/ParkingCard.cipherBuffer
+					sconst_0;
+					bspush 32;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					aload_1;
+					sload_2;
+					getfield_a_this 47;		// reference com/card/ParkingCard.cipherBuffer
+					sconst_0;
+					sload_3;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					getfield_a_this 40;		// reference com/card/ParkingCard.cipherData
+					getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					sconst_2;
+					getfield_a_this 48;		// reference com/card/ParkingCard.iv
+					sconst_0;
+					bspush 16;
+					invokevirtual 139;		// init(Ljavacard/security/Key;B[BSS)V
+					getfield_a_this 40;		// reference com/card/ParkingCard.cipherData
+					getfield_a_this 47;		// reference com/card/ParkingCard.cipherBuffer
+					sconst_0;
+					bspush 32;
+					aload 4;
+					sload 5;
+					bspush 16;
+					sadd;
+					invokevirtual 123;		// doFinal([BSS[BS)S
+					pop;
+					return;
+		}
+
+		.method private decryptInfoField([B[BS)S {
+			.stack 6;
+			.locals 1;
+
+				L0:	getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					invokeinterface 1 160 3;		// javacard/security/AESKey
+					ifne L2;
+				L1:	sconst_0;
+					sreturn;
+				L2:	aload_1;
+					sconst_0;
+					getfield_a_this 48;		// reference com/card/ParkingCard.iv
+					sconst_0;
+					bspush 16;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					aload_1;
+					bspush 16;
+					getfield_a_this 47;		// reference com/card/ParkingCard.cipherBuffer
+					sconst_0;
+					bspush 32;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					getfield_a_this 40;		// reference com/card/ParkingCard.cipherData
+					getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					sconst_1;
+					getfield_a_this 48;		// reference com/card/ParkingCard.iv
+					sconst_0;
+					bspush 16;
+					invokevirtual 139;		// init(Ljavacard/security/Key;B[BSS)V
+					getfield_a_this 40;		// reference com/card/ParkingCard.cipherData
+					getfield_a_this 47;		// reference com/card/ParkingCard.cipherBuffer
+					sconst_0;
+					bspush 32;
+					aload_2;
+					sload_3;
+					invokevirtual 123;		// doFinal([BSS[BS)S
+					pop;
+					sload_3;
+					bspush 31;
+					sadd;
+					sstore 4;
+				L3:	sload 4;
+					sload_3;
+					if_scmplt L6;
+				L4:	aload_2;
+					sload 4;
+					baload;
+					ifne L6;
+				L5:	sinc 4 -1;
+					goto L3;
+				L6:	sload 4;
+					sload_3;
+					if_scmpge L8;
+				L7:	sconst_0;
+					sreturn;
+				L8:	sload 4;
+					sload_3;
+					ssub;
+					sconst_1;
+					sadd;
+					sreturn;
+		}
+
+		.method private decryptECBBlock([BSS[BS)V {
+			.stack 6;
+			.locals 0;
+
+				L0:	getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					invokeinterface 1 160 3;		// javacard/security/AESKey
+					ifne L2;
+				L1:	return;
+				L2:	getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					sconst_1;
+					invokevirtual 122;		// init(Ljavacard/security/Key;B)V
+					getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					aload_1;
+					sload_2;
+					sload_3;
+					aload 4;
+					sload 5;
+					invokevirtual 123;		// doFinal([BSS[BS)S
+					pop;
+					return;
+		}
+
+		.method private createCard(Ljavacard/framework/APDU;)V {
+			.stack 6;
+			.locals 6;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					invokeinterface 1 160 3;		// javacard/security/AESKey
+					ifne L2;
+				L1:	sspush 27013;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L3:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					pop;
+					invokestatic 140;		// javacard/framework/JCSystem.beginTransaction()V
+					aload_0;
+					new 141;		// com/card/CardModel
+					dup;
+					invokespecial 142;		// com/card/CardModel.<init>()V
+					putfield_a 58;		// reference com/card/ParkingCard.cardModel
+					sconst_5;
+					sstore_3;
+				L4:	aload_2;
+					sload_3;
+					baload;
+					sspush 255;
+					sand;
+					sstore 4;
+				L5:	aload_0;
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					sload 4;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					sload 4;
+					invokevirtual 144;		// setId([BSS)V
+					sload_3;
+					sload 4;
+					sconst_1;
+					sadd;
+					sadd;
+					s2b;
+					sstore_3;
+					aload_2;
+					sload_3;
+					baload;
+					sspush 255;
+					sand;
+					sstore 4;
+					aload_0;
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					sload 4;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					invokevirtual 145;		// setIdCard([BSS)V
+					sload_3;
+					sload 4;
+					sconst_1;
+					sadd;
+					sadd;
+					s2b;
+					sstore_3;
+					aload_2;
+					sload_3;
+					baload;
+					sspush 255;
+					sand;
+					sstore 4;
+					aload_0;
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					sload 4;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					invokevirtual 146;		// setFullName([BSS)V
+					sload_3;
+					sload 4;
+					sconst_1;
+					sadd;
+					sadd;
+					s2b;
+					sstore_3;
+					aload_2;
+					sload_3;
+					baload;
+					sspush 255;
+					sand;
+					sstore 4;
+					aload_0;
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					sload 4;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					invokevirtual 147;		// setDateOfBirth([BSS)V
+					sload_3;
+					sload 4;
+					sconst_1;
+					sadd;
+					sadd;
+					s2b;
+					sstore_3;
+					aload_2;
+					sload_3;
+					baload;
+					sspush 255;
+					sand;
+					sstore 4;
+					aload_0;
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					sload 4;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					invokevirtual 148;		// setAddress([BSS)V
+					sload_3;
+					sload 4;
+					sconst_1;
+					sadd;
+					sadd;
+					s2b;
+					sstore_3;
+					aload_2;
+					sload_3;
+					baload;
+					sspush 255;
+					sand;
+					sstore 4;
+					aload_0;
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					sload 4;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					invokevirtual 149;		// setPhoneNumber([BSS)V
+					sload_3;
+					sload 4;
+					sconst_1;
+					sadd;
+					sadd;
+					s2b;
+					sstore_3;
+					aload_2;
+					sload_3;
+					baload;
+					sspush 255;
+					sand;
+					sstore 4;
+					aload_0;
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					sload 4;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					invokevirtual 150;		// setNumberPlate([BSS)V
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 64;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					bastore;
+					aload_0;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					sconst_1;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					invokevirtual 151;		// setMoney([BSS)V
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 64;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 45;
+					bastore;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					sconst_1;
+					invokevirtual 152;		// setExpired([BSS)V
+					invokestatic 153;		// javacard/framework/JCSystem.commitTransaction()V
+					aload_0;
+					invokevirtual 154;		// generateKeyPair()Ljavacard/security/KeyPair;
+					astore 5;
+				L6:	aload_0;
+					aload 5;
+					invokevirtual 155;		// getPrivate()Ljavacard/security/PrivateKey;
+					checkcast 0 156;		// T_CLASSORINTERFACE javacard/security/RSAPrivateKey
+					putfield_a 59;		// reference com/card/ParkingCard.privateKey
+					aload_0;
+					aload 5;
+					invokevirtual 158;		// getPublic()Ljavacard/security/PublicKey;
+					checkcast 0 159;		// T_CLASSORINTERFACE javacard/security/RSAPublicKey
+					putfield_a 60;		// reference com/card/ParkingCard.publicKey
+					getfield_a_this 59;		// reference com/card/ParkingCard.privateKey
+					getfield_a_this 52;		// reference com/card/ParkingCard.tempMessage
+					sconst_0;
+					invokeinterface 3 156 4;		// javacard/security/RSAPrivateKey
+					sstore 6;
+				L7:	getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					sconst_2;
+					invokevirtual 122;		// init(Ljavacard/security/Key;B)V
+					getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 52;		// reference com/card/ParkingCard.tempMessage
+					sconst_0;
+					sload 6;
+					getfield_a_this 45;		// reference com/card/ParkingCard.encryptedPrivateKeyExp
+					sconst_0;
+					invokevirtual 123;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 59;		// reference com/card/ParkingCard.privateKey
+					invokeinterface 1 156 0;		// javacard/security/RSAPrivateKey
+					aload_0;
+					getfield_a_this 60;		// reference com/card/ParkingCard.publicKey
+					aload_2;
+					sconst_0;
+					invokevirtual 161;		// serializePublicKey(Ljavacard/security/RSAPublicKey;[BS)S
+					sstore 7;
+				L8:	aload_1;
+					sconst_0;
+					sload 7;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private updateInfo(Ljavacard/framework/APDU;)V {
+			.stack 4;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	aload_0;
+					aload_2;
+					sconst_5;
+					sload_3;
+					invokespecial 162;		// com/card/ParkingCard.checkAdminForCurrentCommandFromBuffer([BSS)Z
+					ifne L4;
+				L3:	sspush 27010;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	aload_0;
+					aload_2;
+					sconst_5;
+					sload_3;
+					invokespecial 163;		// com/card/ParkingCard.applyInfoFromBuffer([BSS)V
+					return;
+		}
+
+		.method private applyInfoFromBuffer([BSS)V {
+			.stack 6;
+			.locals 4;
+
+				L0:	sload_2;
+					sstore 4;
+				L1:	aload_1;
+					sload 4;
+					invokestatic 164;		// javacard/framework/Util.getShort([BS)S
+					sstore 5;
+				L2:	sload 4;
+					sconst_2;
+					sload 5;
+					sadd;
+					sadd;
+					sstore 4;
+					aload_1;
+					sload 4;
+					invokestatic 164;		// javacard/framework/Util.getShort([BS)S
+					sstore 6;
+				L3:	sload 4;
+					sconst_2;
+					sload 6;
+					sadd;
+					sadd;
+					sstore 4;
+					aload_1;
+					sload 4;
+					sinc 4 1;
+					baload;
+					sspush 255;
+					sand;
+					sstore 7;
+				L4:	aload_0;
+					aload_1;
+					sload 4;
+					sload 7;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					invokevirtual 146;		// setFullName([BSS)V
+					sload 4;
+					sload 7;
+					sadd;
+					sstore 4;
+					aload_1;
+					sload 4;
+					sinc 4 1;
+					baload;
+					sspush 255;
+					sand;
+					sstore 7;
+					aload_0;
+					aload_1;
+					sload 4;
+					sload 7;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					invokevirtual 147;		// setDateOfBirth([BSS)V
+					sload 4;
+					sload 7;
+					sadd;
+					sstore 4;
+					aload_1;
+					sload 4;
+					sinc 4 1;
+					baload;
+					sspush 255;
+					sand;
+					sstore 7;
+					aload_0;
+					aload_1;
+					sload 4;
+					sload 7;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					invokevirtual 148;		// setAddress([BSS)V
+					sload 4;
+					sload 7;
+					sadd;
+					sstore 4;
+					aload_1;
+					sload 4;
+					sinc 4 1;
+					baload;
+					sspush 255;
+					sand;
+					sstore 7;
+					aload_0;
+					aload_1;
+					sload 4;
+					sload 7;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					invokevirtual 149;		// setPhoneNumber([BSS)V
+					return;
+		}
+
+		.method private updateMoney(Ljavacard/framework/APDU;)V {
+			.stack 6;
+			.locals 6;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	aload_0;
+					aload_2;
+					sconst_5;
+					sload_3;
+					invokespecial 162;		// com/card/ParkingCard.checkAdminForCurrentCommandFromBuffer([BSS)Z
+					ifne L4;
+				L3:	sspush 27010;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	sconst_5;
+					sstore 4;
+				L5:	aload_2;
+					sload 4;
+					invokestatic 164;		// javacard/framework/Util.getShort([BS)S
+					sstore 5;
+				L6:	sload 4;
+					sconst_2;
+					sload 5;
+					sadd;
+					sadd;
+					sstore 4;
+					aload_2;
+					sload 4;
+					invokestatic 164;		// javacard/framework/Util.getShort([BS)S
+					sstore 6;
+				L7:	sload 4;
+					sconst_2;
+					sload 6;
+					sadd;
+					sadd;
+					sstore 4;
+					sload_3;
+					sload 4;
+					sconst_5;
+					ssub;
+					ssub;
+					sstore 7;
+				L8:	aload_0;
+					aload_2;
+					sload 4;
+					sload 7;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					invokevirtual 151;		// setMoney([BSS)V
+					return;
+		}
+
+		.method private updateMoneyDirect(Ljavacard/framework/APDU;)V {
+			.stack 6;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	sload_3;
+					ifne L4;
+				L3:	sspush 27012;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					invokeinterface 1 160 3;		// javacard/security/AESKey
+					ifne L6;
+				L5:	sspush 27013;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L6:	aload_0;
+					aload_2;
+					sconst_5;
+					sload_3;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 143;		// com/card/ParkingCard.encryptInfo([BSS[BS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 48;
+					invokevirtual 151;		// setMoney([BSS)V
+					return;
+		}
+
+		.method private updateExpired(Ljavacard/framework/APDU;)V {
+			.stack 4;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	sload_3;
+					ifne L4;
+				L3:	sspush 27012;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					aload_2;
+					sconst_5;
+					sload_3;
+					invokevirtual 152;		// setExpired([BSS)V
+					return;
+		}
+
+		.method private updateAvatar(Ljavacard/framework/APDU;)V {
+			.stack 6;
+			.locals 11;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnonnull L2;
+				L1:	sspush 27014;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L3:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					sstore_3;
+				L4:	aload_2;
+					sconst_2;
+					baload;
+					sspush 255;
+					sand;
+					s2b;
+					aload_2;
+					sconst_3;
+					baload;
+					sspush 255;
+					sand;
+					s2b;
+					invokestatic 165;		// javacard/framework/Util.makeShort(BB)S
+					sstore 4;
+				L5:	sload_3;
+					ifne L7;
+				L6:	return;
+				L7:	sload_3;
+					s2i;
+					bipush 15;
+					iadd;
+					bipush 16;
+					idiv;
+					i2s;
+					sstore 5;
+				L8:	sload 5;
+					bspush 16;
+					smul;
+					sstore 6;
+				L9:	sload 4;
+					sload 6;
+					sadd;
+					sspush 8192;
+					if_scmple L11;
+				L10:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L11:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 166;		// getAvatar()Lcom/card/Avatar;
+					invokevirtual 167;		// getData()[B
+					astore 7;
+				L12:	sconst_5;
+					sstore 8;
+				L13:	sload 4;
+					sstore 9;
+				L14:	sload_3;
+					sstore 10;
+				L15:	getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					sconst_2;
+					invokevirtual 122;		// init(Ljavacard/security/Key;B)V
+					sconst_0;
+					sstore 11;
+				L16:	sload 11;
+					sload 5;
+					if_scmpge L23;
+				L17:	getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 16;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					sload 10;
+					bspush 16;
+					if_scmple L19;
+				L18:	bspush 16;
+					goto L20;
+				L19:	sload 10;
+				L20:	sstore 12;
+				L21:	aload_2;
+					sload 8;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					sload 12;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 16;
+					aload 7;
+					sload 9;
+					invokevirtual 123;		// doFinal([BSS[BS)S
+					pop;
+					sload 8;
+					sload 12;
+					sadd;
+					sstore 8;
+					sinc 9 16;
+					sload 10;
+					sload 12;
+					ssub;
+					sstore 10;
+				L22:	sinc 11 1;
+					goto L16;
+				L23:	sload 4;
+					sload 6;
+					sadd;
+					sstore 11;
+				L24:	sload 11;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 166;		// getAvatar()Lcom/card/Avatar;
+					invokevirtual 168;		// getSize()S
+					if_scmple L26;
+				L25:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 166;		// getAvatar()Lcom/card/Avatar;
+					sload 11;
+					invokevirtual 169;		// setSize(S)V
+				L26:	return;
+		}
+
+		.method private updateAvatarL(Ljavacard/framework/APDU;)V {
+			.stack 6;
+			.locals 10;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnonnull L2;
+				L1:	sspush 27014;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					invokeinterface 1 160 3;		// javacard/security/AESKey
+					ifne L4;
+				L3:	sspush 27013;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L5:	aload_1;
+					invokevirtual 170;		// getIncomingLength()S
+					sstore_3;
+				L6:	sload_3;
+					sspush 8192;
+					if_scmple L8;
+				L7:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L8:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 166;		// getAvatar()Lcom/card/Avatar;
+					invokevirtual 167;		// getData()[B
+					astore 4;
+				L9:	getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					sconst_2;
+					invokevirtual 122;		// init(Ljavacard/security/Key;B)V
+					sconst_0;
+					sstore 5;
+				L10:	sconst_0;
+					sstore 6;
+				L11:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					sstore 7;
+				L12:	sconst_5;
+					sstore 8;
+				L13:	sload 5;
+					sload_3;
+					if_scmpge L26;
+				L14:	sconst_0;
+					sstore 9;
+				L15:	sload 9;
+					sload 7;
+					if_scmpge L23;
+				L16:	sload 7;
+					sload 9;
+					ssub;
+					sstore 10;
+				L17:	sload 10;
+					bspush 16;
+					if_scmple L19;
+				L18:	bspush 16;
+					goto L20;
+				L19:	sload 10;
+				L20:	sstore 11;
+				L21:	getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 16;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					aload_2;
+					sload 8;
+					sload 9;
+					sadd;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					sload 11;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					bspush 16;
+					aload 4;
+					sload 6;
+					invokevirtual 123;		// doFinal([BSS[BS)S
+					pop;
+					sinc 6 16;
+					sload 9;
+					sload 11;
+					sadd;
+					sstore 9;
+				L22:	goto L15;
+				L23:	sload 5;
+					sload 7;
+					sadd;
+					sstore 5;
+					sload 5;
+					sload_3;
+					if_scmpge L25;
+				L24:	aload_1;
+					sconst_0;
+					invokevirtual 171;		// receiveBytes(S)S
+					sstore 7;
+					sconst_0;
+					sstore 8;
+				L25:	goto L13;
+				L26:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 166;		// getAvatar()Lcom/card/Avatar;
+					sload 6;
+					invokevirtual 169;		// setSize(S)V
+					return;
+		}
+
+		.method private getAvatar(Ljavacard/framework/APDU;)V {
+			.stack 6;
+			.locals 12;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnull L2;
+				L1:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 166;		// getAvatar()Lcom/card/Avatar;
+					ifnonnull L3;
+				L2:	sspush 27013;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L3:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 166;		// getAvatar()Lcom/card/Avatar;
+					invokevirtual 167;		// getData()[B
+					astore_2;
+				L4:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 166;		// getAvatar()Lcom/card/Avatar;
+					invokevirtual 168;		// getSize()S
+					sstore_3;
+				L5:	sload_3;
+					ifne L7;
+				L6:	aload_1;
+					sconst_0;
+					sconst_0;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+				L7:	sload_3;
+					bspush 16;
+					sdiv;
+					sstore 4;
+				L8:	sload 4;
+					ifne L10;
+				L9:	aload_1;
+					sconst_0;
+					sconst_0;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+				L10:	aload_0;
+					aload_2;
+					sload 4;
+					sconst_1;
+					ssub;
+					bspush 16;
+					smul;
+					bspush 16;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 172;		// com/card/ParkingCard.decryptECBBlock([BSS[BS)V
+					sconst_0;
+					sstore 5;
+				L11:	bspush 15;
+					sstore 6;
+				L12:	sload 6;
+					iflt L15;
+				L13:	getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sload 6;
+					baload;
+					ifne L15;
+				L14:	sinc 5 1;
+					sinc 6 -1;
+					goto L12;
+				L15:	sload_3;
+					sload 5;
+					ssub;
+					sstore 6;
+				L16:	aload_1;
+					invokevirtual 173;		// setOutgoing()S
+					pop;
+					aload_1;
+					sload 6;
+					invokevirtual 174;		// setOutgoingLength(S)V
+					aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore 7;
+				L17:	sconst_0;
+					sstore 8;
+				L18:	sconst_0;
+					sstore 9;
+				L19:	sconst_0;
+					sstore 10;
+				L20:	sconst_0;
+					sstore 11;
+				L21:	sload 11;
+					sload 4;
+					if_scmpge L33;
+				L22:	aload_0;
+					aload_2;
+					sload 8;
+					bspush 16;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokespecial 172;		// com/card/ParkingCard.decryptECBBlock([BSS[BS)V
+					sload 6;
+					sload 9;
+					ssub;
+					sstore 12;
+				L23:	sload 12;
+					bspush 16;
+					if_scmple L25;
+				L24:	bspush 16;
+					goto L26;
+				L25:	sload 12;
+				L26:	sstore 13;
+				L27:	getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					aload 7;
+					sload 10;
+					sload 13;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					sload 10;
+					sload 13;
+					sadd;
+					sstore 10;
+					sload 9;
+					sload 13;
+					sadd;
+					sstore 9;
+					sinc 8 16;
+					sload 10;
+					sspush 200;
+					if_scmpge L29;
+				L28:	sload 9;
+					sload 6;
+					if_scmplt L30;
+				L29:	aload_1;
+					aload 7;
+					sconst_0;
+					sload 10;
+					invokevirtual 175;		// sendBytesLong([BSS)V
+					sconst_0;
+					sstore 10;
+				L30:	sload 9;
+					sload 6;
+					if_scmplt L32;
+				L31:	goto L33;
+				L32:	sinc 11 1;
+					goto L21;
+				L33:	return;
+		}
+
+		.method private getAvatarL(Ljavacard/framework/APDU;)V {
+			.stack 6;
+			.locals 7;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnull L2;
+				L1:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 166;		// getAvatar()Lcom/card/Avatar;
+					ifnonnull L3;
+				L2:	sspush 27013;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L3:	getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					invokeinterface 1 160 3;		// javacard/security/AESKey
+					ifne L5;
+				L4:	sspush 27013;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L5:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 166;		// getAvatar()Lcom/card/Avatar;
+					invokevirtual 167;		// getData()[B
+					astore_2;
+				L6:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 166;		// getAvatar()Lcom/card/Avatar;
+					invokevirtual 168;		// getSize()S
+					sstore_3;
+				L7:	sload_3;
+					ifne L9;
+				L8:	aload_1;
+					sconst_0;
+					sconst_0;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+				L9:	getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					sconst_1;
+					invokevirtual 122;		// init(Ljavacard/security/Key;B)V
+					getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					aload_2;
+					sload_3;
+					bspush 16;
+					ssub;
+					bspush 16;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokevirtual 123;		// doFinal([BSS[BS)S
+					pop;
+					sconst_0;
+					sstore 4;
+				L10:	bspush 15;
+					sstore 5;
+				L11:	sload 5;
+					iflt L14;
+				L12:	getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sload 5;
+					baload;
+					ifne L14;
+				L13:	sinc 4 1;
+					sinc 5 -1;
+					goto L11;
+				L14:	sload_3;
+					sload 4;
+					ssub;
+					sstore 5;
+				L15:	aload_1;
+					invokevirtual 173;		// setOutgoing()S
+					pop;
+					aload_1;
+					sload 5;
+					invokevirtual 174;		// setOutgoingLength(S)V
+					sconst_0;
+					sstore 6;
+				L16:	sconst_0;
+					sstore 7;
+				L17:	sload 6;
+					sload 5;
+					if_scmpge L23;
+				L18:	getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					sconst_1;
+					invokevirtual 122;		// init(Ljavacard/security/Key;B)V
+					getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					aload_2;
+					sload 7;
+					bspush 16;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					invokevirtual 123;		// doFinal([BSS[BS)S
+					pop;
+					bspush 16;
+					sstore 8;
+				L19:	sload 6;
+					bspush 16;
+					sadd;
+					sload 5;
+					if_scmple L21;
+				L20:	sload 5;
+					sload 6;
+					ssub;
+					sstore 8;
+				L21:	aload_1;
+					getfield_a_this 46;		// reference com/card/ParkingCard.temporary
+					sconst_0;
+					sload 8;
+					invokevirtual 175;		// sendBytesLong([BSS)V
+					sload 6;
+					sload 8;
+					sadd;
+					sstore 6;
+					sinc 7 16;
+				L22:	goto L17;
+				L23:	return;
+		}
+
+		.method private getCard(Ljavacard/framework/APDU;)V {
+			.stack 7;
+			.locals 4;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnonnull L2;
+				L1:	return;
+				L2:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L3:	sconst_0;
+					sstore_3;
+				L4:	aload_2;
+					sload_3;
+					aload_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 176;		// getIdCard()[B
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					invokespecial 177;		// com/card/ParkingCard.decryptInfoField([B[BS)S
+					s2b;
+					bastore;
+					sload_3;
+					aload_2;
+					sload_3;
+					baload;
+					sconst_1;
+					sadd;
+					sadd;
+					s2b;
+					sstore_3;
+					aload_2;
+					sload_3;
+					aload_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 178;		// getFullName()[B
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					invokespecial 177;		// com/card/ParkingCard.decryptInfoField([B[BS)S
+					s2b;
+					bastore;
+					sload_3;
+					aload_2;
+					sload_3;
+					baload;
+					sconst_1;
+					sadd;
+					sadd;
+					s2b;
+					sstore_3;
+					aload_2;
+					sload_3;
+					aload_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 179;		// getDateOfBirth()[B
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					invokespecial 177;		// com/card/ParkingCard.decryptInfoField([B[BS)S
+					s2b;
+					bastore;
+					sload_3;
+					aload_2;
+					sload_3;
+					baload;
+					sconst_1;
+					sadd;
+					sadd;
+					s2b;
+					sstore_3;
+					aload_2;
+					sload_3;
+					aload_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 180;		// getAddress()[B
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					invokespecial 177;		// com/card/ParkingCard.decryptInfoField([B[BS)S
+					s2b;
+					bastore;
+					sload_3;
+					aload_2;
+					sload_3;
+					baload;
+					sconst_1;
+					sadd;
+					sadd;
+					s2b;
+					sstore_3;
+					aload_2;
+					sload_3;
+					aload_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 181;		// getPhoneNumber()[B
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					invokespecial 177;		// com/card/ParkingCard.decryptInfoField([B[BS)S
+					s2b;
+					bastore;
+					sload_3;
+					aload_2;
+					sload_3;
+					baload;
+					sconst_1;
+					sadd;
+					sadd;
+					s2b;
+					sstore_3;
+					aload_2;
+					sload_3;
+					aload_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 182;		// getNumberPlate()[B
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					invokespecial 177;		// com/card/ParkingCard.decryptInfoField([B[BS)S
+					s2b;
+					bastore;
+					sload_3;
+					aload_2;
+					sload_3;
+					baload;
+					sconst_1;
+					sadd;
+					sadd;
+					s2b;
+					sstore_3;
+					aload_2;
+					sload_3;
+					aload_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 183;		// getMoney()[B
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					invokespecial 177;		// com/card/ParkingCard.decryptInfoField([B[BS)S
+					s2b;
+					bastore;
+					sload_3;
+					aload_2;
+					sload_3;
+					baload;
+					sconst_1;
+					sadd;
+					sadd;
+					s2b;
+					sstore_3;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 126;		// getExpired()[B
+					astore 4;
+				L5:	aload 4;
+					arraylength;
+					sstore 5;
+				L6:	aload_2;
+					sload_3;
+					sload 5;
+					s2b;
+					bastore;
+					sload 5;
+					ifle L8;
+				L7:	aload 4;
+					sconst_0;
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					sload 5;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+				L8:	aload_1;
+					sconst_0;
+					sload_3;
+					sload 5;
+					sadd;
+					sconst_1;
+					sadd;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private getMoney(Ljavacard/framework/APDU;)V {
+			.stack 4;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 183;		// getMoney()[B
+					aload_2;
+					sconst_0;
+					invokespecial 177;		// com/card/ParkingCard.decryptInfoField([B[BS)S
+					sstore_3;
+				L2:	aload_1;
+					sconst_0;
+					sload_3;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private verifyPIN(Ljavacard/framework/APDU;)V {
+			.stack 5;
+			.locals 5;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	sconst_5;
+					sstore 4;
+				L3:	getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					ifnonnull L5;
+				L4:	sspush 27014;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L5:	sload_3;
+					bspush 16;
+					if_scmpeq L7;
+				L6:	sspush 26368;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L7:	aload_0;
+					aload_2;
+					sload 4;
+					getfield_a_this 54;		// reference com/card/ParkingCard.tempPinData
+					sconst_0;
+					invokespecial 129;		// com/card/ParkingCard.decryptTransportData([BS[BS)S
+					sstore 5;
+				L8:	getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					getfield_a_this 54;		// reference com/card/ParkingCard.tempPinData
+					sconst_0;
+					sload 5;
+					s2b;
+					invokevirtual 130;		// match([BSS)Z
+					ifeq L14;
+				L9:	aload_0;
+					getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					invokevirtual 131;		// getKEK()[B
+					getfield_a_this 43;		// reference com/card/ParkingCard.encryptedMasterKey_User
+					invokespecial 132;		// com/card/ParkingCard.restoreMasterKeyFromSlot([B[B)V
+				L10:	goto L13;
+				L11:	astore 6;
+				L12:	sspush 27012;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L13:	return;
+				L14:	aload_2;
+					sconst_5;
+					getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					invokevirtual 184;		// getTriesRemaining()B
+					bastore;
+					aload_1;
+					sconst_5;
+					sconst_1;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					sspush 27264;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+					return;
+			.exceptionTable {
+				// start_block end_block handler_block catch_type_index
+				L9 L10 L11 127;
+			}
+		}
+
+		.method private updatePIN(Ljavacard/framework/APDU;)V {
+			.stack 5;
+			.locals 6;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					invokeinterface 1 160 3;		// javacard/security/AESKey
+					ifne L2;
+				L1:	sspush 27013;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L3:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					pop;
+					aload_2;
+					sconst_4;
+					baload;
+					sspush 255;
+					sand;
+					sstore_3;
+				L4:	aload_0;
+					aload_2;
+					sconst_5;
+					sload_3;
+					invokespecial 162;		// com/card/ParkingCard.checkAdminForCurrentCommandFromBuffer([BSS)Z
+					ifne L6;
+				L5:	sspush 27010;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L6:	sconst_5;
+					sstore 4;
+				L7:	aload_2;
+					sload 4;
+					invokestatic 164;		// javacard/framework/Util.getShort([BS)S
+					sstore 5;
+				L8:	sload 4;
+					sconst_2;
+					sload 5;
+					sadd;
+					sadd;
+					sstore 4;
+					aload_2;
+					sload 4;
+					invokestatic 164;		// javacard/framework/Util.getShort([BS)S
+					sstore 6;
+				L9:	sload 4;
+					sconst_2;
+					sload 6;
+					sadd;
+					sadd;
+					sstore 4;
+					aload_0;
+					aload_2;
+					sload 4;
+					getfield_a_this 54;		// reference com/card/ParkingCard.tempPinData
+					sconst_0;
+					invokespecial 129;		// com/card/ParkingCard.decryptTransportData([BS[BS)S
+					sstore 7;
+				L10:	getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					getfield_a_this 54;		// reference com/card/ParkingCard.tempPinData
+					sconst_0;
+					sload 7;
+					s2b;
+					invokevirtual 137;		// update([BSS)V
+					aload_0;
+					getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					invokevirtual 131;		// getKEK()[B
+					getfield_a_this 43;		// reference com/card/ParkingCard.encryptedMasterKey_User
+					invokespecial 138;		// com/card/ParkingCard.saveMasterKeyToSlot([B[B)V
+					return;
+		}
+
+		.method private resetPIN(Ljavacard/framework/APDU;)V {
+			.stack 4;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	aload_0;
+					aload_2;
+					sconst_5;
+					sload_3;
+					invokespecial 162;		// com/card/ParkingCard.checkAdminForCurrentCommandFromBuffer([BSS)Z
+					ifne L4;
+				L3:	sspush 27010;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					invokevirtual 78;		// resetPin()V
+					return;
+		}
+
+		.method private getPinTries(Ljavacard/framework/APDU;)V {
+			.stack 3;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					ifnonnull L2;
+				L1:	sspush 27014;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L3:	aload_2;
+					sconst_0;
+					getfield_a_this 56;		// reference com/card/ParkingCard.pin
+					invokevirtual 184;		// getTriesRemaining()B
+					bastore;
+					aload_1;
+					sconst_0;
+					sconst_1;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private entryGate(Ljavacard/framework/APDU;)V {
+			.stack 4;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnonnull L2;
+				L1:	sspush 27014;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L3:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					pop;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 185;		// getIsInside()Z
+					ifeq L5;
+				L4:	aload_2;
+					sconst_0;
+					sconst_0;
+					bastore;
+					aload_1;
+					sconst_0;
+					sconst_1;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+				L5:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					aload_2;
+					sconst_5;
+					bspush 8;
+					invokevirtual 186;		// setEntryTime([BSS)V
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					sconst_1;
+					invokevirtual 187;		// setIsInside(Z)V
+					aload_2;
+					sconst_0;
+					sconst_1;
+					bastore;
+					aload_1;
+					sconst_0;
+					sconst_1;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private exitGate(Ljavacard/framework/APDU;)V {
+			.stack 5;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnonnull L2;
+				L1:	sspush 27014;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L3:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 185;		// getIsInside()Z
+					ifne L5;
+				L4:	aload_2;
+					sconst_0;
+					sconst_0;
+					bastore;
+					aload_1;
+					sconst_0;
+					sconst_1;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+				L5:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 188;		// getEntryTime()[B
+					astore_3;
+				L6:	aload_2;
+					sconst_0;
+					sconst_1;
+					bastore;
+					aload_3;
+					sconst_0;
+					aload_2;
+					sconst_1;
+					bspush 8;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					sconst_0;
+					invokevirtual 187;		// setIsInside(Z)V
+					aload_3;
+					sconst_0;
+					bspush 8;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					aload_1;
+					sconst_0;
+					bspush 9;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private getEntryState(Ljavacard/framework/APDU;)V {
+			.stack 5;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnonnull L2;
+				L1:	sspush 27014;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L3:	aload_2;
+					sconst_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 185;		// getIsInside()Z
+					ifeq L5;
+				L4:	sconst_1;
+					goto L6;
+				L5:	sconst_0;
+				L6:	bastore;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 188;		// getEntryTime()[B
+					sconst_0;
+					aload_2;
+					sconst_1;
+					bspush 8;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					aload_1;
+					sconst_0;
+					bspush 9;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private getDbId(Ljavacard/framework/APDU;)V {
+			.stack 5;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnonnull L2;
+				L1:	sspush 27014;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L3:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 189;		// getId()[B
+					astore_3;
+				L4:	aload_3;
+					sconst_0;
+					aload_2;
+					sconst_0;
+					aload_3;
+					arraylength;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					aload_1;
+					sconst_0;
+					aload_3;
+					arraylength;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private getCardId(Ljavacard/framework/APDU;)V {
+			.stack 4;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnonnull L2;
+				L1:	sspush 27014;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L3:	aload_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 176;		// getIdCard()[B
+					aload_2;
+					sconst_0;
+					invokespecial 177;		// com/card/ParkingCard.decryptInfoField([B[BS)S
+					sstore_3;
+				L4:	aload_1;
+					sconst_0;
+					sload_3;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private setBackendPublicKey(Ljavacard/framework/APDU;)V {
+			.stack 4;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	sload_3;
+					sspush 200;
+					if_scmple L4;
+				L3:	sspush 27012;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					aload_2;
+					sconst_5;
+					sload_3;
+					invokevirtual 190;		// setBackendPublicKey([BSS)V
+					aload_0;
+					aconst_null;
+					putfield_a 33;		// reference com/card/ParkingCard.cachedBackendPubKey
+					return;
+		}
+
+		.method private updateVehicle(Ljavacard/framework/APDU;)V {
+			.stack 5;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					pop;
+					aload_2;
+					sconst_5;
+					getfield_a_this 49;		// reference com/card/ParkingCard.vehicle
+					sconst_0;
+					bspush 16;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					return;
+		}
+
+		.method private getVehicle(Ljavacard/framework/APDU;)V {
+			.stack 5;
+			.locals 1;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	getfield_a_this 49;		// reference com/card/ParkingCard.vehicle
+					sconst_0;
+					aload_2;
+					sconst_0;
+					bspush 16;
+					invokestatic 72;		// javacard/framework/Util.arrayCopyNonAtomic([BS[BSS)S
+					pop;
+					aload_1;
+					sconst_0;
+					bspush 16;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private createSignature(Ljavacard/framework/APDU;)V {
+			.stack 6;
+			.locals 4;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L1:	aload_1;
+					invokevirtual 128;		// setIncomingAndReceive()S
+					sstore_3;
+				L2:	getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					invokeinterface 1 160 3;		// javacard/security/AESKey
+					ifne L4;
+				L3:	sspush 27013;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L4:	getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 37;		// reference com/card/ParkingCard.masterKeyObj
+					sconst_1;
+					invokevirtual 122;		// init(Ljavacard/security/Key;B)V
+					getfield_a_this 41;		// reference com/card/ParkingCard.cipherWrap
+					getfield_a_this 45;		// reference com/card/ParkingCard.encryptedPrivateKeyExp
+					sconst_0;
+					sspush 128;
+					getfield_a_this 52;		// reference com/card/ParkingCard.tempMessage
+					sconst_0;
+					invokevirtual 123;		// doFinal([BSS[BS)S
+					pop;
+					getfield_a_this 60;		// reference com/card/ParkingCard.publicKey
+					getfield_a_this 52;		// reference com/card/ParkingCard.tempMessage
+					sspush 128;
+					invokeinterface 3 159 5;		// javacard/security/RSAPublicKey
+					sstore 4;
+				L5:	getfield_a_this 59;		// reference com/card/ParkingCard.privateKey
+					getfield_a_this 52;		// reference com/card/ParkingCard.tempMessage
+					sspush 128;
+					sload 4;
+					invokeinterface 4 156 7;		// javacard/security/RSAPrivateKey
+					getfield_a_this 59;		// reference com/card/ParkingCard.privateKey
+					getfield_a_this 52;		// reference com/card/ParkingCard.tempMessage
+					sconst_0;
+					sspush 128;
+					invokeinterface 4 156 6;		// javacard/security/RSAPrivateKey
+					getfield_a_this 50;		// reference com/card/ParkingCard.signature
+					getfield_a_this 59;		// reference com/card/ParkingCard.privateKey
+					sconst_1;
+					invokevirtual 191;		// init(Ljavacard/security/Key;B)V
+					getfield_a_this 50;		// reference com/card/ParkingCard.signature
+					aload_2;
+					sconst_5;
+					sload_3;
+					getfield_a_this 51;		// reference com/card/ParkingCard.signatureBuffer
+					sconst_0;
+					invokevirtual 192;		// sign([BSS[BS)S
+					sstore 5;
+				L6:	getfield_a_this 59;		// reference com/card/ParkingCard.privateKey
+					invokeinterface 1 156 0;		// javacard/security/RSAPrivateKey
+					getfield_a_this 52;		// reference com/card/ParkingCard.tempMessage
+					sconst_0;
+					sspush 256;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					aload_1;
+					invokevirtual 173;		// setOutgoing()S
+					pop;
+					aload_1;
+					sload 5;
+					invokevirtual 174;		// setOutgoingLength(S)V
+					aload_1;
+					getfield_a_this 51;		// reference com/card/ParkingCard.signatureBuffer
+					sconst_0;
+					sload 5;
+					invokevirtual 175;		// sendBytesLong([BSS)V
+					return;
+		}
+
+		.method private getCardNO(Ljavacard/framework/APDU;)V {
+			.stack 4;
+			.locals 2;
+
+			.descriptor	Ljavacard/framework/APDU;	1.10;
+
+				L0:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnonnull L2;
+				L1:	sspush 27013;
+					invokestatic 68;		// javacard/framework/ISOException.throwIt(S)V
+				L2:	aload_1;
+					invokevirtual 92;		// getBuffer()[B
+					astore_2;
+				L3:	sconst_0;
+					sstore_3;
+				L4:	aload_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 176;		// getIdCard()[B
+					aload_2;
+					sload_3;
+					invokespecial 193;		// com/card/ParkingCard.copyAttr([B[BS)S
+					sstore_3;
+					aload_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 178;		// getFullName()[B
+					aload_2;
+					sload_3;
+					invokespecial 193;		// com/card/ParkingCard.copyAttr([B[BS)S
+					sstore_3;
+					aload_0;
+					getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 179;		// getDateOfBirth()[B
+					aload_2;
+					sload_3;
+					invokespecial 193;		// com/card/ParkingCard.copyAttr([B[BS)S
+					sstore_3;
+					aload_1;
+					sconst_0;
+					sload_3;
+					invokevirtual 125;		// setOutgoingAndSend(SS)V
+					return;
+		}
+
+		.method private copyAttr([B[BS)S {
+			.stack 5;
+			.locals 1;
+
+				L0:	aload_1;
+					ifnonnull L2;
+				L1:	aload_2;
+					sload_3;
+					sinc 3 1;
+					sconst_0;
+					bastore;
+					sload_3;
+					sreturn;
+				L2:	aload_0;
+					aload_1;
+					aload_2;
+					sload_3;
+					sconst_1;
+					sadd;
+					invokespecial 177;		// com/card/ParkingCard.decryptInfoField([B[BS)S
+					sstore 4;
+				L3:	aload_2;
+					sload_3;
+					sload 4;
+					s2b;
+					bastore;
+					sload_3;
+					sconst_1;
+					sadd;
+					sload 4;
+					sadd;
+					sreturn;
+		}
+
+		.method private checkAdminForCurrentCommandFromBuffer([BSS)Z {
+			.stack 5;
+			.locals 3;
+
+				L0:	sload_2;
+					sstore 4;
+				L1:	sload 4;
+					sconst_2;
+					sadd;
+					sload_2;
+					ssub;
+					sload_3;
+					if_scmple L3;
+				L2:	sconst_0;
+					sreturn;
+				L3:	aload_1;
+					sload 4;
+					invokestatic 164;		// javacard/framework/Util.getShort([BS)S
+					sstore 5;
+				L4:	sinc 4 2;
+					sload 5;
+					ifle L7;
+				L5:	sload 5;
+					sspush 256;
+					if_scmpgt L7;
+				L6:	sload 4;
+					sload 5;
+					sadd;
+					sload_2;
+					ssub;
+					sload_3;
+					if_scmple L8;
+				L7:	sconst_0;
+					sreturn;
+				L8:	getfield_a_this 52;		// reference com/card/ParkingCard.tempMessage
+					sconst_0;
+					sload 5;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					aload_1;
+					sload 4;
+					getfield_a_this 52;		// reference com/card/ParkingCard.tempMessage
+					sconst_0;
+					sload 5;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					sload 4;
+					sload 5;
+					sadd;
+					sstore 4;
+					sload 4;
+					sconst_2;
+					sadd;
+					sload_2;
+					ssub;
+					sload_3;
+					if_scmple L10;
+				L9:	sconst_0;
+					sreturn;
+				L10:	aload_1;
+					sload 4;
+					invokestatic 164;		// javacard/framework/Util.getShort([BS)S
+					sstore 6;
+				L11:	sinc 4 2;
+					sload 6;
+					ifle L14;
+				L12:	sload 6;
+					sspush 128;
+					if_scmpgt L14;
+				L13:	sload 4;
+					sload 6;
+					sadd;
+					sload_2;
+					ssub;
+					sload_3;
+					if_scmple L15;
+				L14:	sconst_0;
+					sreturn;
+				L15:	getfield_a_this 53;		// reference com/card/ParkingCard.tempSignature
+					sconst_0;
+					sload 6;
+					sconst_0;
+					invokestatic 66;		// javacard/framework/Util.arrayFillNonAtomic([BSSB)S
+					pop;
+					aload_1;
+					sload 4;
+					getfield_a_this 53;		// reference com/card/ParkingCard.tempSignature
+					sconst_0;
+					sload 6;
+					invokestatic 63;		// javacard/framework/Util.arrayCopy([BS[BSS)S
+					pop;
+					aload_0;
+					getfield_a_this 52;		// reference com/card/ParkingCard.tempMessage
+					sload 5;
+					getfield_a_this 53;		// reference com/card/ParkingCard.tempSignature
+					sload 6;
+					invokespecial 194;		// com/card/ParkingCard.verifySignatureFromBE([BS[BS)Z
+					ifeq L18;
+				L16:	aload_0;
+					getfield_a_this 52;		// reference com/card/ParkingCard.tempMessage
+					sload 5;
+					invokespecial 195;		// com/card/ParkingCard.isAdminRole([BS)Z
+					ifeq L18;
+				L17:	sconst_1;
+					goto L19;
+				L18:	sconst_0;
+				L19:	sreturn;
+		}
+
+		.method private verifySignatureFromBE([BS[BS)Z {
+			.stack 7;
+			.locals 4;
+
+				L0:	getfield_a_this 33;		// reference com/card/ParkingCard.cachedBackendPubKey
+					ifnonnull L9;
+				L1:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					ifnonnull L4;
+				L2:	sconst_0;
+				L3:	sreturn;
+				L4:	getfield_a_this 58;		// reference com/card/ParkingCard.cardModel
+					invokevirtual 196;		// getBackendPublicKey()[B
+					astore 5;
+				L5:	sconst_0;
+					sstore 6;
+				L6:	aload 5;
+					sload 6;
+					sinc 6 1;
+					baload;
+					sspush 255;
+					sand;
+					sstore 7;
+				L7:	aload_0;
+					sconst_4;
+					sspush 512;
+					sconst_0;
+					invokestatic 157;		// javacard/security/KeyBuilder.buildKey(BSZ)Ljavacard/security/Key;
+					checkcast 0 159;		// T_CLASSORINTERFACE javacard/security/RSAPublicKey
+					putfield_a 33;		// reference com/card/ParkingCard.cachedBackendPubKey
+					getfield_a_this 33;		// reference com/card/ParkingCard.cachedBackendPubKey
+					aload 5;
+					sload 6;
+					sload 7;
+					invokeinterface 4 159 7;		// javacard/security/RSAPublicKey
+					sload 6;
+					sload 7;
+					sadd;
+					sstore 6;
+					aload 5;
+					sload 6;
+					sinc 6 1;
+					baload;
+					sspush 255;
+					sand;
+					sstore 8;
+				L8:	getfield_a_this 33;		// reference com/card/ParkingCard.cachedBackendPubKey
+					aload 5;
+					sload 6;
+					sload 8;
+					invokeinterface 4 159 6;		// javacard/security/RSAPublicKey
+					aload_0;
+					bspush 10;
+					sconst_0;
+					invokestatic 76;		// javacard/security/Signature.getInstance(BZ)Ljavacard/security/Signature;
+					putfield_a 34;		// reference com/card/ParkingCard.cachedSigVerify
+				L9:	getfield_a_this 34;		// reference com/card/ParkingCard.cachedSigVerify
+					getfield_a_this 33;		// reference com/card/ParkingCard.cachedBackendPubKey
+					sconst_2;
+					invokevirtual 191;		// init(Ljavacard/security/Key;B)V
+					getfield_a_this 34;		// reference com/card/ParkingCard.cachedSigVerify
+					aload_1;
+					sconst_0;
+					sload_2;
+					aload_3;
+					sconst_0;
+					sload 4;
+					invokevirtual 197;		// verify([BSS[BSS)Z
+				L10:	sreturn;
+				L11:	astore 5;
+				L12:	sconst_0;
+					sreturn;
+			.exceptionTable {
+				// start_block end_block handler_block catch_type_index
+				L0 L3 L11 127;
+				L4 L10 L11 127;
+			}
+		}
+
+		.method private isAdminRole([BS)Z {
+			.stack 3;
+			.locals 0;
+
+				L0:	sload_2;
+					sconst_1;
+					if_scmplt L3;
+				L1:	aload_1;
+					sload_2;
+					sconst_1;
+					ssub;
+					baload;
+					sconst_1;
+					if_scmpne L3;
+				L2:	sconst_1;
+					goto L4;
+				L3:	sconst_0;
+				L4:	sreturn;
+		}
+
+		.method public generateKeyPair()Ljavacard/security/KeyPair; 8 {
+			.stack 4;
+			.locals 1;
+
+			.descriptor	Ljavacard/security/KeyPair;	2.16;
+
+				L0:	new 198;		// javacard/security/KeyPair
+					dup;
+					sconst_1;
+					sspush 1024;
+					invokespecial 199;		// javacard/security/KeyPair.<init>(BS)V
+					astore_1;
+				L1:	aload_1;
+					invokevirtual 200;		// genKeyPair()V
+					aload_1;
+					areturn;
+		}
+
+		.method public serializePublicKey(Ljavacard/security/RSAPublicKey;[BS)S 9 {
+			.stack 4;
+			.locals 2;
+
+			.descriptor	Ljavacard/security/RSAPublicKey;	2.9;
+
+				L0:	aload_1;
+					aload_2;
+					sload_3;
+					sconst_2;
+					sadd;
+					invokeinterface 3 159 4;		// javacard/security/RSAPublicKey
+					sstore 4;
+				L1:	aload_1;
+					aload_2;
+					sload_3;
+					sconst_2;
+					sadd;
+					sload 4;
+					sadd;
+					sconst_2;
+					sadd;
+					invokeinterface 3 159 5;		// javacard/security/RSAPublicKey
+					sstore 5;
+				L2:	aload_2;
+					sload_3;
+					sload 4;
+					invokestatic 201;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					aload_2;
+					sload_3;
+					sconst_2;
+					sadd;
+					sload 4;
+					sadd;
+					sload 5;
+					invokestatic 201;		// javacard/framework/Util.setShort([BSS)S
+					pop;
+					sconst_4;
+					sload 4;
+					sadd;
+					sload 5;
+					sadd;
+					sreturn;
+		}
+
+	}
+
+}

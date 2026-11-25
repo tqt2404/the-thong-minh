@@ -1,0 +1,9 @@
+# Bo qua tai lieu, PDF, Markdown, Bao cao va anh
+*.pdf
+*.md
+!L02_Nhom4_Xay dung the bai do xe thong minh/**/*.md
+*.docx
+*.jpg
+*.png
+text_output/
+L02_Nhom4_Xay dung the bai do xe thong minh/Báo cáo/
