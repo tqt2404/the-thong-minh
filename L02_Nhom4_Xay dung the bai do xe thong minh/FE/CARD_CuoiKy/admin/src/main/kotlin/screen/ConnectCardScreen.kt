@@ -72,15 +72,7 @@ fun ConnectCardScreen(navigator: Navigator) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFF0F172A),
-                        Color(0xFF1E293B),
-                        Color(0xFF334155)
-                    )
-                )
-            )
+            .background(ui.ParkColors.Background)
     ) {
         Column(
             modifier = Modifier
@@ -91,40 +83,36 @@ fun ConnectCardScreen(navigator: Navigator) {
         ) {
             Box(
                 modifier = Modifier
-                    .size(150.dp)
-                    .clip(CircleShape)
-                    .background(
-                        brush = Brush.linearGradient(
-                            colors = listOf(Color(0xFF6366F1), Color(0xFF8B5CF6))
-                        )
-                    ),
+                    .size(72.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(ui.ParkColors.PrimarySoft),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "CARD",
-                    fontSize = 40.sp,
+                    text = "NFC",
+                    fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White
+                    color = ui.ParkColors.Primary
                 )
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             Text(
-                text = "Kết nối thẻ thông minh",
-                fontSize = 32.sp,
+                text = "Kết nối thẻ",
+                fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.White
+                color = ui.ParkColors.TextPrimary
             )
 
             Text(
-                text = "Đặt thẻ vào đầu đọc để bắt đầu",
-                fontSize = 16.sp,
-                color = Color(0xFF94A3B8),
-                modifier = Modifier.padding(top = 8.dp)
+                text = "Đặt thẻ lên đầu đọc để bắt đầu",
+                fontSize = 14.sp,
+                color = ui.ParkColors.TextSecondary,
+                modifier = Modifier.padding(top = 6.dp)
             )
 
-            Spacer(modifier = Modifier.height(48.dp))
+            Spacer(modifier = Modifier.height(32.dp))
 
             Button(
                 onClick = {
@@ -245,42 +233,26 @@ fun ConnectCardScreen(navigator: Navigator) {
             }
 
             if (atr != null && readerName != null) {
-                Spacer(modifier = Modifier.height(18.dp))
-                Card(
-                    backgroundColor = Color(0xFF1E293B),
-                    shape = RoundedCornerShape(12.dp),
-                    modifier = Modifier.padding(horizontal = 32.dp)
-                ) {
-                    Column(modifier = Modifier.padding(16.dp)) {
-                        Text("Kết nối thành công", color = Color(0xFF10B981), fontWeight = FontWeight.Bold)
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text("Đầu đọc: $readerName", color = Color(0xFF94A3B8), fontSize = 14.sp)
-                        Text("ATR: $atr", color = Color(0xFF38BDF8), fontSize = 12.sp)
-                        if (selectStatus != null) {
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text(selectStatus!!, color = Color(0xFF38BDF8), fontSize = 12.sp, fontWeight = FontWeight.Bold)
-                        }
+                Spacer(modifier = Modifier.height(16.dp))
+                ui.AppCard(modifier = Modifier.padding(horizontal = 32.dp), padding = 16.dp) {
+                    Text("Kết nối thành công", color = ui.ParkColors.Success, fontWeight = FontWeight.Bold)
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text("Đầu đọc: $readerName", color = ui.ParkColors.TextSecondary, fontSize = 14.sp)
+                    if (selectStatus != null) {
+                        Spacer(modifier = Modifier.height(4.dp))
+                        Text(selectStatus!!, color = ui.ParkColors.Primary, fontSize = 12.sp, fontWeight = FontWeight.Bold)
                     }
                 }
             }
 
             if (errorMessage != null) {
-                Spacer(modifier = Modifier.height(18.dp))
-                Card(
-                    backgroundColor = Color(0xFFF87171).copy(alpha = 0.15f),
-                    shape = RoundedCornerShape(12.dp),
-                    modifier = Modifier.padding(horizontal = 32.dp)
-                ) {
-                    Text(
-                        errorMessage!!,
-                        color = Color(0xFFF87171),
-                        modifier = Modifier.padding(16.dp),
-                        fontWeight = FontWeight.SemiBold
-                    )
+                Spacer(modifier = Modifier.height(16.dp))
+                Box(modifier = Modifier.widthIn(max = 420.dp).padding(horizontal = 16.dp)) {
+                    ui.StatusBanner(errorMessage, isError = true)
                 }
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             if (CardManager.activeCard != null) {
                 TextButton(
@@ -294,7 +266,7 @@ fun ConnectCardScreen(navigator: Navigator) {
                 ) {
                     Text(
                         text = "Ngắt kết nối thẻ",
-                        color = Color(0xFF94A3B8)
+                        color = ui.ParkColors.Error
                     )
                 }
             }
@@ -307,7 +279,7 @@ fun ConnectCardScreen(navigator: Navigator) {
             ) {
                 Text(
                     text = "Quay lại",
-                    color = Color(0xFF94A3B8)
+                    color = ui.ParkColors.TextSecondary
                 )
             }
         }

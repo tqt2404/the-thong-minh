@@ -32,15 +32,7 @@ fun LoginScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFF0F172A),
-                        Color(0xFF1E293B),
-                        Color(0xFF334155)
-                    )
-                )
-            )
+            .background(ui.ParkColors.Background)
     ) {
         Column(
             modifier = Modifier
@@ -49,77 +41,62 @@ fun LoginScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Logo
             Box(
                 modifier = Modifier
-                    .size(100.dp)
-                    .clip(CircleShape)
-                    .background(
-                        brush = Brush.linearGradient(
-                            colors = listOf(Color(0xFF6366F1), Color(0xFF8B5CF6))
-                        )
-                    ),
+                    .size(72.dp)
+                    .clip(RoundedCornerShape(16.dp))
+                    .background(ui.ParkColors.Primary),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = "PC",
-                    fontSize = 40.sp,
+                    fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.White
                 )
             }
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(20.dp))
 
             Text(
-                text = "Park Card Admin",
-                fontSize = 32.sp,
+                text = "Quản trị Thẻ Công Viên",
+                fontSize = 28.sp,
                 fontWeight = FontWeight.Bold,
-                color = Color.White
+                color = ui.ParkColors.TextPrimary
             )
 
             Text(
-                text = "Quản lý thẻ công viên trò chơi",
-                fontSize = 16.sp,
-                color = Color(0xFF94A3B8),
-                modifier = Modifier.padding(top = 8.dp)
+                text = "Hệ thống quản lý thẻ công viên thông minh",
+                fontSize = 14.sp,
+                color = ui.ParkColors.TextSecondary,
+                modifier = Modifier.padding(top = 6.dp)
             )
 
-            Spacer(modifier = Modifier.height(48.dp))
+            Spacer(modifier = Modifier.height(32.dp))
 
             // Login Card
-            Card(
-                modifier = Modifier
-                    .width(450.dp)
-                    .shadow(24.dp, RoundedCornerShape(16.dp)),
-                shape = RoundedCornerShape(16.dp),
-                backgroundColor = Color(0xFF1E293B),
-                elevation = 0.dp
+            ui.AppCard(
+                modifier = Modifier.width(440.dp),
+                padding = 32.dp
             ) {
-                Column(
-                    modifier = Modifier.padding(32.dp)
-                ) {
+                Column {
                     Text(
                         text = "Đăng nhập",
-                        fontSize = 24.sp,
+                        fontSize = 22.sp,
                         fontWeight = FontWeight.Bold,
-                        color = Color.White
+                        color = ui.ParkColors.TextPrimary
                     )
 
-                    Spacer(modifier = Modifier.height(32.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
 
                     OutlinedTextField(
                         value = screenModel.username,
                         onValueChange = { screenModel.username = it },
-                        label = { Text("Tên đăng nhập", color = Color(0xFF94A3B8)) },
+                        label = { Text("Tên đăng nhập") },
                         modifier = Modifier.fillMaxWidth(),
-                        colors = TextFieldDefaults.outlinedTextFieldColors(
-                            textColor = Color.White,
-                            cursorColor = Color(0xFF6366F1),
-                            focusedBorderColor = Color(0xFF6366F1),
-                            unfocusedBorderColor = Color(0xFF475569)
-                        ),
-                        shape = RoundedCornerShape(12.dp)
+                        colors = ui.lightTextFieldColors(),
+                        shape = RoundedCornerShape(10.dp),
+                        singleLine = true
                     )
 
                     Spacer(modifier = Modifier.height(20.dp))
@@ -127,43 +104,36 @@ fun LoginScreen(
                     OutlinedTextField(
                         value = screenModel.password,
                         onValueChange = { screenModel.password = it },
-                        label = { Text("Mật khẩu", color = Color(0xFF94A3B8)) },
+                        label = { Text("Mật khẩu") },
                         trailingIcon = {
                             TextButton(onClick = { passwordVisible = !passwordVisible }) {
                                 Text(
                                     if (passwordVisible) "Ẩn" else "Hiện",
-                                    color = Color(0xFF94A3B8),
+                                    color = ui.ParkColors.TextSecondary,
                                     fontSize = 12.sp
                                 )
                             }
                         },
                         visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
                         modifier = Modifier.fillMaxWidth(),
-                        colors = TextFieldDefaults.outlinedTextFieldColors(
-                            textColor = Color.White,
-                            cursorColor = Color(0xFF6366F1),
-                            focusedBorderColor = Color(0xFF6366F1),
-                            unfocusedBorderColor = Color(0xFF475569)
-                        ),
-                        shape = RoundedCornerShape(12.dp)
+                        colors = ui.lightTextFieldColors(),
+                        shape = RoundedCornerShape(10.dp),
+                        singleLine = true
                     )
 
-                    Spacer(modifier = Modifier.height(32.dp))
+                    Spacer(modifier = Modifier.height(24.dp))
 
                     Button(
                         onClick = { screenModel.login() },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(50.dp),
+                            .height(46.dp),
                         colors = ButtonDefaults.buttonColors(
-                            backgroundColor = Color(0xFF6366F1)
+                            backgroundColor = ui.ParkColors.Primary
                         ),
-                        shape = RoundedCornerShape(12.dp),
+                        shape = RoundedCornerShape(10.dp),
                         enabled = loginState !is viewmodel.LoginUiState.Loading,
-                        elevation = ButtonDefaults.elevation(
-                            defaultElevation = 0.dp,
-                            pressedElevation = 0.dp
-                        )
+                        elevation = ButtonDefaults.elevation(0.dp, 0.dp)
                     ) {
                         if (loginState is viewmodel.LoginUiState.Loading) {
                             CircularProgressIndicator(

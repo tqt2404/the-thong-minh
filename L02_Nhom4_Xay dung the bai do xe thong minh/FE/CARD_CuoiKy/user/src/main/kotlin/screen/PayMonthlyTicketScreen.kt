@@ -218,29 +218,20 @@ fun PayMonthlyTicketScreen(navigator: Navigator, repository: CardRepository) {
 
                 // Check if still valid (NOT expired)
                 if (!isExpired && currentExpiry != null) {
-                    // Show "Still Valid" message
-                    Card(
-                        modifier = Modifier.width(500.dp),
-                        shape = RoundedCornerShape(16.dp),
-                        backgroundColor = Color(0xFF1E293B),
-                        elevation = 8.dp
-                    ) {
+                    ui.AppCard(modifier = Modifier.width(480.dp)) {
                         Column(
-                            modifier = Modifier.padding(32.dp),
+                            modifier = Modifier.fillMaxWidth(),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Text("✅", fontSize = 64.sp)
-                            Spacer(modifier = Modifier.height(16.dp))
                             Text(
                                 "Thẻ của bạn vẫn còn hạn",
                                 fontSize = 20.sp,
                                 fontWeight = FontWeight.Bold,
-                                color = Color.White,
+                                color = ui.ParkColors.TextPrimary,
                                 textAlign = TextAlign.Center
                             )
                             Spacer(modifier = Modifier.height(12.dp))
 
-                            // Format expiry date for display
                             val expiryDisplay = try {
                                 val expiryDate = LocalDate.parse(currentExpiry, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                                 expiryDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
@@ -248,34 +239,22 @@ fun PayMonthlyTicketScreen(navigator: Navigator, repository: CardRepository) {
                                 currentExpiry
                             }
 
-                            Text(
-                                "Hạn sử dụng đến ngày:",
-                                fontSize = 14.sp,
-                                color = Color(0xFF94A3B8)
-                            )
+                            Text("Hạn sử dụng đến ngày:", fontSize = 14.sp, color = ui.ParkColors.TextSecondary)
                             Spacer(modifier = Modifier.height(8.dp))
                             if (expiryDisplay != null) {
                                 Text(
                                     expiryDisplay,
-                                    fontSize = 28.sp,
+                                    fontSize = 26.sp,
                                     fontWeight = FontWeight.Bold,
-                                    color = Color(0xFF10B981)
+                                    color = ui.ParkColors.Success
                                 )
                             }
-                            Spacer(modifier = Modifier.height(24.dp))
-                            Button(
+                            Spacer(modifier = Modifier.height(20.dp))
+                            ui.SecondaryButton(
+                                text = "Quay lại",
                                 onClick = { navigator.navigateTo(Screen.FeatureMenu) },
-                                modifier = Modifier.fillMaxWidth().height(50.dp),
-                                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF475569)),
-                                shape = RoundedCornerShape(12.dp)
-                            ) {
-                                Text(
-                                    "Quay lại",
-                                    color = Color.White,
-                                    fontSize = 16.sp,
-                                    fontWeight = FontWeight.Bold
-                                )
-                            }
+                                modifier = Modifier.fillMaxWidth()
+                            )
                         }
                     }
                 } else {

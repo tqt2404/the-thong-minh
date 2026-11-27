@@ -121,61 +121,37 @@ fun UpdateExpiredScreen(navigator: Navigator, repository: CardRepository) {
                             fontWeight = FontWeight.Bold
                         )
                     }
-                    else -> Card(
-                        modifier = Modifier.width(400.dp).padding(vertical = 16.dp),
-                        shape = RoundedCornerShape(16.dp),
-                        backgroundColor = Color(0xFF1E293B),
-                        elevation = 8.dp
-                    ) {
-                        Column(
-                            modifier = Modifier.padding(24.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text("Ngày hết hạn", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                            Spacer(modifier = Modifier.height(16.dp))
+                    else -> ui.AppCard(modifier = Modifier.width(440.dp)) {
+                        Text("Ngày hết hạn", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = ui.ParkColors.TextPrimary)
+                        Spacer(modifier = Modifier.height(16.dp))
 
-                            OutlinedTextField(
-                                value = expiredDate,
-                                onValueChange = {
-                                    // Chỉ cho phép số và dấu /
-                                    if (it.length <= 10 && it.all { c -> c.isDigit() || c == '/' }) {
-                                        expiredDate = it
-                                    }
-                                },
-                                label = { Text("DD/MM/YYYY", color = Color(0xFF94A3B8)) },
-                                placeholder = { Text("VD: 31/12/2025", color = Color(0xFF64748B)) },
-                                modifier = Modifier.fillMaxWidth(),
-                                colors = TextFieldDefaults.outlinedTextFieldColors(
-                                    textColor = Color.White,
-                                    cursorColor = Color(0xFF10B981),
-                                    focusedBorderColor = Color(0xFF10B981),
-                                    unfocusedBorderColor = Color(0xFF475569)
-                                ),
-                                shape = RoundedCornerShape(12.dp)
-                            )
+                        OutlinedTextField(
+                            value = expiredDate,
+                            onValueChange = {
+                                if (it.length <= 10 && it.all { c -> c.isDigit() || c == '/' }) {
+                                    expiredDate = it
+                                }
+                            },
+                            label = { Text("DD/MM/YYYY") },
+                            placeholder = { Text("VD: 31/12/2025") },
+                            modifier = Modifier.fillMaxWidth(),
+                            colors = ui.lightTextFieldColors(),
+                            shape = RoundedCornerShape(10.dp),
+                            singleLine = true
+                        )
 
-                            Spacer(modifier = Modifier.height(20.dp))
+                        Spacer(modifier = Modifier.height(16.dp))
 
-                            if (errorText != null) {
-                                Text(errorText!!, color = Color.Red, fontSize = 14.sp)
-                                Spacer(modifier = Modifier.height(8.dp))
-                            }
+                        ui.StatusBanner(errorText, isError = true)
+                        ui.StatusBanner(successText)
+                        if (errorText != null || successText != null) Spacer(modifier = Modifier.height(12.dp))
 
-                            if (successText != null) {
-                                Text(successText!!, color = Color.Green, fontSize = 14.sp)
-                                Spacer(modifier = Modifier.height(8.dp))
-                            }
-
-                            Button(
-                                onClick = doUpdateExpired,
-                                modifier = Modifier.fillMaxWidth().height(50.dp),
-                                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF10B981)),
-                                shape = RoundedCornerShape(10.dp),
-                                enabled = expiredDate.isNotEmpty()
-                            ) {
-                                Text("Cập nhật hạn", color = Color.White, fontWeight = FontWeight.Bold)
-                            }
-                        }
+                        ui.PrimaryButton(
+                            text = "Cập nhật hạn",
+                            onClick = doUpdateExpired,
+                            enabled = expiredDate.isNotEmpty(),
+                            modifier = Modifier.fillMaxWidth()
+                        )
                     }
                 }
             }

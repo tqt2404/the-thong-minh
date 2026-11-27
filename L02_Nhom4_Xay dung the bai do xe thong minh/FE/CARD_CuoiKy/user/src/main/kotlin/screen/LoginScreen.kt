@@ -36,34 +36,43 @@ fun LoginScreen(navigator: Navigator, repository: CardRepository) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(Color(0xFF0F172A), Color(0xFF1E293B))
-                )
-            ),
+            .background(ui.ParkColors.Background),
         contentAlignment = Alignment.Center
     ) {
-        Card(
-            modifier = Modifier
-                .width(500.dp)
-                .padding(24.dp),
-            shape = RoundedCornerShape(20.dp),
-            backgroundColor = Color(0xFF1E293B),
-            elevation = 16.dp
+        Column(
+            modifier = Modifier.width(680.dp).padding(24.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            Column(
-                modifier = Modifier.padding(32.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
+            ui.AppCard(modifier = Modifier.fillMaxWidth(), padding = 16.dp) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column {
+                        Text("Cổng Công Viên", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = ui.ParkColors.TextPrimary)
+                        Text("Thẻ đã kết nối", fontSize = 13.sp, color = ui.ParkColors.Success, fontWeight = FontWeight.Medium)
+                    }
+                    ui.SecondaryButton(
+                        text = "Rút thẻ",
+                        onClick = {
+                            CardManager.disconnect()
+                            navigator.navigateTo(Screen.ConnectCard)
+                        }
+                    )
+                }
+            }
+
+            ui.AppCard(modifier = Modifier.fillMaxWidth(), padding = 24.dp) {
                 TabRow(
                     selectedTabIndex = selectedTab,
-                    backgroundColor = Color(0xFF334155),
-                    contentColor = Color.White,
+                    backgroundColor = ui.ParkColors.SurfaceMuted,
+                    contentColor = ui.ParkColors.PrimaryDark,
                     modifier = Modifier.fillMaxWidth(),
                     indicator = { tabPositions ->
                         TabRowDefaults.Indicator(
                             Modifier.tabIndicatorOffset(tabPositions[selectedTab]),
-                            color = Color(0xFF6366F1),
+                            color = ui.ParkColors.Primary,
                             height = 3.dp
                         )
                     }
@@ -75,16 +84,17 @@ fun LoginScreen(navigator: Navigator, repository: CardRepository) {
                             text = {
                                 Text(
                                     title,
-                                    fontSize = 16.sp,
+                                    fontSize = 15.sp,
+                                    color = if (selectedTab == index) ui.ParkColors.PrimaryDark else ui.ParkColors.TextSecondary,
                                     fontWeight = if (selectedTab == index) FontWeight.Bold else FontWeight.Normal
                                 )
                             },
-                            modifier = Modifier.padding(vertical = 12.dp)
+                            modifier = Modifier.padding(vertical = 10.dp)
                         )
                     }
                 }
 
-                Spacer(modifier = Modifier.height(32.dp))
+                Spacer(modifier = Modifier.height(24.dp))
 
                 when (selectedTab) {
                     0 -> EntryExitTab(repository)

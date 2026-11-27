@@ -136,90 +136,61 @@ fun UserUpdatePinScreen(navigator: Navigator, repository: CardRepository) {
                 modifier = Modifier.fillMaxSize().padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Card(
-                    modifier = Modifier.width(500.dp),
-                    shape = RoundedCornerShape(16.dp),
-                    backgroundColor = Color(0xFF1E293B),
-                    elevation = 8.dp
-                ) {
+                ui.AppCard(modifier = Modifier.width(480.dp)) {
                     Column(
-                        modifier = Modifier.padding(24.dp),
+                        modifier = Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(
-                            "🔐",
-                            fontSize = 48.sp,
-                            modifier = Modifier.padding(bottom = 16.dp)
-                        )
-
                         Text(
                             "Cập nhật mã PIN",
                             fontSize = 18.sp,
                             fontWeight = FontWeight.Bold,
-                            color = Color.White,
-                            modifier = Modifier.padding(bottom = 24.dp)
+                            color = ui.ParkColors.TextPrimary,
+                            modifier = Modifier.padding(bottom = 20.dp)
                         )
 
-                        // Current PIN
                         OutlinedTextField(
                             value = currentPin,
                             onValueChange = {
                                 if (it.all { c -> c.isDigit() } && it.length <= 6) currentPin = it
                             },
-                            label = { Text("PIN hiện tại", color = Color(0xFF94A3B8)) },
-                            placeholder = { Text("Nhập 4-6 số", color = Color(0xFF64748B)) },
+                            label = { Text("PIN hiện tại") },
+                            placeholder = { Text("Nhập 4-6 số") },
                             modifier = Modifier.fillMaxWidth(),
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                textColor = Color.White,
-                                cursorColor = Color(0xFF06B6D4),
-                                focusedBorderColor = Color(0xFF06B6D4),
-                                unfocusedBorderColor = Color(0xFF475569)
-                            ),
-                            shape = RoundedCornerShape(12.dp),
+                            colors = ui.lightTextFieldColors(),
+                            shape = RoundedCornerShape(10.dp),
                             singleLine = true,
                             visualTransformation = PasswordVisualTransformation()
                         )
 
-                        Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(14.dp))
 
-                        // New PIN
                         OutlinedTextField(
                             value = newPin,
                             onValueChange = {
                                 if (it.all { c -> c.isDigit() } && it.length <= 6) newPin = it
                             },
-                            label = { Text("PIN mới", color = Color(0xFF94A3B8)) },
-                            placeholder = { Text("Nhập 4-6 số", color = Color(0xFF64748B)) },
+                            label = { Text("PIN mới") },
+                            placeholder = { Text("Nhập 4-6 số") },
                             modifier = Modifier.fillMaxWidth(),
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                textColor = Color.White,
-                                cursorColor = Color(0xFF06B6D4),
-                                focusedBorderColor = Color(0xFF06B6D4),
-                                unfocusedBorderColor = Color(0xFF475569)
-                            ),
-                            shape = RoundedCornerShape(12.dp),
+                            colors = ui.lightTextFieldColors(),
+                            shape = RoundedCornerShape(10.dp),
                             singleLine = true,
                             visualTransformation = PasswordVisualTransformation()
                         )
 
-                        Spacer(modifier = Modifier.height(16.dp))
+                        Spacer(modifier = Modifier.height(14.dp))
 
-                        // Confirm PIN
                         OutlinedTextField(
                             value = confirmPin,
                             onValueChange = {
                                 if (it.all { c -> c.isDigit() } && it.length <= 6) confirmPin = it
                             },
-                            label = { Text("Xác nhận PIN mới", color = Color(0xFF94A3B8)) },
-                            placeholder = { Text("Nhập lại PIN mới", color = Color(0xFF64748B)) },
+                            label = { Text("Xác nhận PIN mới") },
+                            placeholder = { Text("Nhập lại PIN mới") },
                             modifier = Modifier.fillMaxWidth(),
-                            colors = TextFieldDefaults.outlinedTextFieldColors(
-                                textColor = Color.White,
-                                cursorColor = Color(0xFF06B6D4),
-                                focusedBorderColor = Color(0xFF06B6D4),
-                                unfocusedBorderColor = Color(0xFF475569)
-                            ),
-                            shape = RoundedCornerShape(12.dp),
+                            colors = ui.lightTextFieldColors(),
+                            shape = RoundedCornerShape(10.dp),
                             singleLine = true,
                             visualTransformation = PasswordVisualTransformation()
                         )

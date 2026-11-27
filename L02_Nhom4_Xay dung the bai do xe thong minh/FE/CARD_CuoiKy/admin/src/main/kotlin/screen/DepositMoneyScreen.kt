@@ -42,26 +42,9 @@ fun DepositMoneyScreen(navigator: Navigator, repository: CardRepository) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFF0F172A),
-                        Color(0xFF1E293B)
-                    )
-                )
-            )
+            .background(ui.ParkColors.Background)
     ) {
-        TopAppBar(
-            title = { Text("Nạp tiền", fontWeight = FontWeight.Bold) },
-            backgroundColor = Color(0xFFEC4899),
-            contentColor = Color.White,
-            elevation = 0.dp,
-            navigationIcon = {
-                IconButton(onClick = { navigator.navigateTo(Screen.FeatureMenu) }) {
-                    Icon(Icons.Default.ArrowBack, contentDescription = "Quay lại", tint = Color.White)
-                }
-            }
-        )
+        ui.SectionHeader(title = "Nạp tiền tại quầy", subtitle = "Nạp tiền mặt vào số dư thẻ")
 
         // Check thẻ và cảnh báo chung
         LaunchedEffect(Unit) {
@@ -146,46 +129,30 @@ fun DepositMoneyByCashCard(
     repository: CardRepository,
     setState: ((Triple<Boolean, String?, String?>) -> Unit)
 ) {
-    Card(
-        modifier = Modifier.width(400.dp).padding(vertical = 16.dp),
-        shape = RoundedCornerShape(16.dp),
-        backgroundColor = Color(0xFF1E293B),
-        elevation = 8.dp
+    ui.AppCard(
+        modifier = Modifier.width(440.dp).padding(vertical = 16.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(24.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text("Nhập số tiền", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White)
-            Spacer(modifier = Modifier.height(16.dp))
+        Text("Nhập số tiền", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = ui.ParkColors.TextPrimary)
+        Spacer(modifier = Modifier.height(16.dp))
 
-            OutlinedTextField(
-                value = amount,
-                onValueChange = { if (it.all { c -> c.isDigit() }) onAmountChange(it) },
-                label = { Text("Số tiền (VNĐ)", color = Color(0xFF94A3B8)) },
-                modifier = Modifier.fillMaxWidth(),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    textColor = Color.White,
-                    cursorColor = Color(0xFFEC4899),
-                    focusedBorderColor = Color(0xFFEC4899),
-                    unfocusedBorderColor = Color(0xFF475569)
-                ),
-                shape = RoundedCornerShape(12.dp)
-            )
+        OutlinedTextField(
+            value = amount,
+            onValueChange = { if (it.all { c -> c.isDigit() }) onAmountChange(it) },
+            label = { Text("Số tiền (VNĐ)") },
+            modifier = Modifier.fillMaxWidth(),
+            colors = ui.lightTextFieldColors(),
+            shape = RoundedCornerShape(10.dp),
+            singleLine = true
+        )
 
-            Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
-            if (errorText != null) {
-                Text(errorText, color = Color.Red, fontSize = 14.sp)
-                Spacer(modifier = Modifier.height(8.dp))
-            }
-            if (successText != null) {
-                Text(successText, color = Color.Green, fontSize = 14.sp)
-                Spacer(modifier = Modifier.height(8.dp))
-            }
+        ui.StatusBanner(errorText, isError = true)
+        ui.StatusBanner(successText)
+        if (errorText != null || successText != null) Spacer(modifier = Modifier.height(12.dp))
 
-            Button(
-                onClick = {
+        Button(
+            onClick = {
                     scope.launch {
                         setState(Triple(true, null, null))
                         try {
@@ -223,13 +190,12 @@ fun DepositMoneyByCashCard(
                         }
                     }
                 },
-                modifier = Modifier.fillMaxWidth().height(50.dp),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFEC4899)),
-                shape = RoundedCornerShape(10.dp),
-                enabled = amount.isNotEmpty()
-            ) {
-                Text("Nạp tiền", color = Color.White, fontWeight = FontWeight.Bold)
-            }
+            modifier = Modifier.fillMaxWidth().height(46.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = ui.ParkColors.Primary),
+            shape = RoundedCornerShape(10.dp),
+            enabled = amount.isNotEmpty()
+        ) {
+            Text("Nạp tiền", color = Color.White, fontWeight = FontWeight.SemiBold)
         }
     }
 }

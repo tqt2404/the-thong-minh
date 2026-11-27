@@ -31,85 +31,53 @@ fun ConnectCardScreen(navigator: Navigator) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(Color(0xFF0F172A), Color(0xFF1E293B))
-                )
-            ),
+            .background(ui.ParkColors.Background),
         contentAlignment = Alignment.Center
     ) {
-        Card(
+        ui.AppCard(
             modifier = Modifier
-                .width(500.dp)
+                .width(440.dp)
                 .padding(24.dp),
-            shape = RoundedCornerShape(20.dp),
-            backgroundColor = Color(0xFF1E293B),
-            elevation = 16.dp
+            padding = 32.dp
         ) {
             Column(
-                modifier = Modifier.padding(40.dp),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    "🎫",
-                    fontSize = 64.sp,
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
+                Box(
+                    modifier = Modifier
+                        .size(64.dp)
+                        .background(ui.ParkColors.PrimarySoft, RoundedCornerShape(16.dp)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        "NFC",
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = ui.ParkColors.Primary
+                    )
+                }
+
+                Spacer(Modifier.height(16.dp))
 
                 Text(
                     "Kết nối thẻ",
-                    fontSize = 28.sp,
+                    fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
-                    color = Color.White,
+                    color = ui.ParkColors.TextPrimary,
                     modifier = Modifier.padding(bottom = 8.dp)
                 )
 
                 Text(
-                    "Đặt thẻ lên đầu đọc và nhấn kết nối",
+                    "Đặt thẻ lên đầu đọc và nhấn Kết nối",
                     fontSize = 14.sp,
-                    color = Color(0xFF94A3B8),
-                    modifier = Modifier.padding(bottom = 32.dp)
+                    color = ui.ParkColors.TextSecondary,
+                    modifier = Modifier.padding(bottom = 24.dp)
                 )
 
-                // Status message (success)
-                if (statusMessage != null) {
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 24.dp),
-                        shape = RoundedCornerShape(12.dp),
-                        backgroundColor = Color(0xFF10B981).copy(alpha = 0.1f),
-                        elevation = 0.dp
-                    ) {
-                        Text(
-                            statusMessage!!,
-                            color = Color(0xFF10B981),
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            modifier = Modifier.padding(16.dp)
-                        )
-                    }
-                }
-
-                // Error message
-                if (errorMessage != null) {
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(bottom = 24.dp),
-                        shape = RoundedCornerShape(12.dp),
-                        backgroundColor = Color(0xFFF87171).copy(alpha = 0.1f),
-                        elevation = 0.dp
-                    ) {
-                        Text(
-                            errorMessage!!,
-                            color = Color(0xFFF87171),
-                            fontSize = 14.sp,
-                            fontWeight = FontWeight.SemiBold,
-                            modifier = Modifier.padding(16.dp)
-                        )
-                    }
-                }
+                ui.StatusBanner(statusMessage)
+                ui.StatusBanner(errorMessage, isError = true)
+                if (statusMessage != null || errorMessage != null) Spacer(Modifier.height(16.dp))
 
                 Button(
                     onClick = {

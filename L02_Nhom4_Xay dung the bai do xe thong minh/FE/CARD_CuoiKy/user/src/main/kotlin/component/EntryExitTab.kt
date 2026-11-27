@@ -308,101 +308,57 @@ fun EntryExitTab(repository: CardRepository) {
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(
-            "🎡",
-            fontSize = 64.sp,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-
-        Text(
-            if (isInside) "Ra cửa khu vui chơi" else "Vào cửa khu vui chơi",
-            fontSize = 28.sp,
+            if (isInside) "Ra khỏi khu vui chơi" else "Vào khu vui chơi",
+            fontSize = 22.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White,
-            modifier = Modifier.padding(bottom = 8.dp)
+            color = ui.ParkColors.TextPrimary,
+            modifier = Modifier.padding(bottom = 6.dp)
         )
 
         Text(
             if (isInside) "Nhấn nút để ra khỏi khu vui chơi" else "Nhấn nút để vào khu vui chơi",
             fontSize = 14.sp,
-            color = Color(0xFF94A3B8),
-            modifier = Modifier.padding(bottom = 32.dp)
+            color = ui.ParkColors.TextSecondary,
+            modifier = Modifier.padding(bottom = 20.dp)
         )
 
         // Status card
-        Card(
+        ui.AppCard(
             modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
-            shape = RoundedCornerShape(12.dp),
-            backgroundColor = Color(0xFF334155),
-            elevation = 4.dp
+            padding = 16.dp,
+            backgroundColor = ui.ParkColors.SurfaceMuted
         ) {
-            Column(modifier = Modifier.padding(16.dp)) {
-                Row(
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        "Trạng thái:",
-                        fontSize = 14.sp,
-                        color = Color(0xFF94A3B8)
-                    )
-                    Text(
-                        if (isInside) "🎡 Đang trong khu vui chơi" else "✅ Đã ra ngoài",
-                        fontSize = 14.sp,
-                        color = if (isInside) Color(0xFFFBBF24) else Color(0xFF10B981),
-                        fontWeight = FontWeight.Medium
-                    )
-                }
+            ui.InfoRow(
+                label = "Trạng thái",
+                value = if (isInside) "Đang trong khu vui chơi" else "Đang ở ngoài",
+                valueColor = if (isInside) ui.ParkColors.Warning else ui.ParkColors.Success,
+                showDivider = isCardBlocked || hasMonthlyPass || (isInside && entryTime != null)
+            )
 
-                // ✅ HIỂN THỊ CẢNH BÁO THẺ BỊ KHÓA
-                if (isCardBlocked) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            "Thẻ:",
-                            fontSize = 14.sp,
-                            color = Color(0xFF94A3B8)
-                        )
-                        Text(
-                            "🔒 Đã bị khóa",
-                            fontSize = 14.sp,
-                            color = Color(0xFFF87171),
-                            fontWeight = FontWeight.Bold
-                        )
-                    }
-                }
+            if (isCardBlocked) {
+                ui.InfoRow(
+                    label = "Thẻ",
+                    value = "Đã bị khóa",
+                    valueColor = ui.ParkColors.Error,
+                    showDivider = hasMonthlyPass || (isInside && entryTime != null)
+                )
+            }
 
-                if (hasMonthlyPass) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            "Vé tháng:",
-                            fontSize = 14.sp,
-                            color = Color(0xFF94A3B8)
-                        )
-                        Text(
-                            "✅ Còn hạn",
-                            fontSize = 14.sp,
-                            color = Color(0xFF10B981),
-                            fontWeight = FontWeight.Medium
-                        )
-                    }
-                }
+            if (hasMonthlyPass) {
+                ui.InfoRow(
+                    label = "Vé tháng",
+                    value = "Còn hạn (Miễn phí)",
+                    valueColor = ui.ParkColors.Success,
+                    showDivider = isInside && entryTime != null
+                )
+            }
 
-                if (isInside && entryTime != null) {
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Divider(color = Color(0xFF475569))
-                    Spacer(modifier = Modifier.height(8.dp))
-                    Text(
-                        "Giờ vào: ${entryTime!!.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"))}",
-                        fontSize = 12.sp,
-                        color = Color(0xFF94A3B8),
-                        fontStyle = FontStyle.Italic
-                    )
-                }
+            if (isInside && entryTime != null) {
+                ui.InfoRow(
+                    label = "Giờ vào",
+                    value = entryTime!!.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")),
+                    showDivider = false
+                )
             }
         }
 

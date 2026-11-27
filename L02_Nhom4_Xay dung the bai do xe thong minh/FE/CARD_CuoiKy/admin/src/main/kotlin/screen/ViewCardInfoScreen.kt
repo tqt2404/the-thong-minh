@@ -152,89 +152,38 @@ fun ViewCardInfoScreen(navigator: Navigator) {
     }
 
     FeatureScreenTemplate(
-        title = "Xem chi tiết",
-        description = "Xem thông tin chi tiết thẻ",
+        title = "Thông tin thẻ",
+        description = "Thông tin chủ thẻ, số dư và hạn vé tháng",
         onBack = { navigator.navigateTo(Screen.FeatureMenu) },
-        gradientColor = Color(0xFFF59E0B),
+        gradientColor = ui.ParkColors.Primary,
         content = {
             Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(24.dp),
+                modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 when {
-                    isLoading -> {
-                        CircularProgressIndicator()
-                    }
-                    errorText != null -> {
-                        Text(errorText!!, color = Color.Red)
-                    }
-                    noInfoOnCard == true -> {
-                        Card(
-                            modifier = Modifier
-                                .width(700.dp)
-                                .padding(vertical = 16.dp)
-                                .padding(bottom = 16.dp),
-                            shape = RoundedCornerShape(16.dp),
-                            backgroundColor = Color(0xFF1E293B),
-                            elevation = 8.dp
-                        ) {
-                            Column(modifier = Modifier.padding(24.dp)) {
-                                Text(
-                                    "Thẻ chưa có thông tin",
-                                    color = Color(0xFFF87171),
-                                    style = MaterialTheme.typography.subtitle1
+                    isLoading -> CircularProgressIndicator(color = ui.ParkColors.Primary)
+                    errorText != null -> ui.StatusBanner(errorText, isError = true)
+                    noInfoOnCard == true -> ui.StatusBanner("Thẻ chưa có thông tin", isWarning = true)
+                    else -> ui.AppCard(modifier = Modifier.fillMaxWidth()) {
+                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                            if (avatarImage != null) {
+                                Image(
+                                    bitmap = avatarImage!!,
+                                    contentDescription = "Ảnh đại diện",
+                                    modifier = Modifier
+                                        .size(110.dp)
+                                        .clip(RoundedCornerShape(55.dp))
                                 )
                             }
-                        }
-                    }
-                    else -> {
-                        Card(
-                            modifier = Modifier
-                                .width(700.dp)
-                                //.padding(vertical = 16.dp)
-                                .padding(bottom = 16.dp),
-                            shape = RoundedCornerShape(16.dp),
-                            backgroundColor = Color(0xFF1E293B),
-                            elevation = 8.dp
-                        ) {
-                            Column(
-                                modifier = Modifier.padding(24.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                // Ảnh đại diện nếu có
-                                if (avatarImage != null) {
-                                    Image(
-                                        bitmap = avatarImage!!,
-                                        contentDescription = "Ảnh đại diện",
-                                        modifier = Modifier
-                                            .size(150.dp)
-                                            .clip(RoundedCornerShape(18.dp))
-                                            .padding(bottom = 12.dp)
-                                    )
-                                } else {
-                                    Text(
-                                        "👤",
-                                        fontSize = 56.sp,
-                                        modifier = Modifier.padding(bottom = 8.dp)
-                                    )
-                                }
-                                Spacer(modifier = Modifier.height(8.dp))
-                                InfoRow("CCCD", idCard)
-                                Divider(color = Color(0xFF475569), modifier = Modifier.padding(vertical = 10.dp))
-                                InfoRow("Họ tên", fullName)
-                                Divider(color = Color(0xFF475569), modifier = Modifier.padding(vertical = 10.dp))
-                                InfoRow("Ngày sinh", dob)
-                                Divider(color = Color(0xFF475569), modifier = Modifier.padding(vertical = 10.dp))
-                                InfoRow("Địa chỉ", address)
-                                Divider(color = Color(0xFF475569), modifier = Modifier.padding(vertical = 10.dp))
-                                InfoRow("Số điện thoại", phone)
-                                Divider(color = Color(0xFF475569), modifier = Modifier.padding(vertical = 10.dp))
-                                InfoRow("Số dư", formatVnAmount(balance))
-                                Divider(color = Color(0xFF475569), modifier = Modifier.padding(vertical = 10.dp))
-                                InfoRow("Hết hạn", expired)
-                            }
+                            Spacer(modifier = Modifier.height(12.dp))
+                            ui.InfoRow("Số CCCD", idCard)
+                            ui.InfoRow("Họ và tên", fullName)
+                            ui.InfoRow("Ngày sinh", dob)
+                            ui.InfoRow("Địa chỉ", address)
+                            ui.InfoRow("Số điện thoại", phone)
+                            ui.InfoRow("Số dư", formatVnAmount(balance), valueColor = ui.ParkColors.PrimaryDark)
+                            ui.InfoRow("Hạn vé tháng", expired, showDivider = false)
                         }
                     }
                 }

@@ -136,18 +136,18 @@ fun DatePickerDialog(
                                                 .aspectRatio(1f)
                                                 .padding(1.dp)
                                                 .then(
-                                                    if (thisDate == selectedDate) Modifier.border(
-                                                        BorderStroke(2.dp, Color(0xFF6366F1)), CircleShape
-                                                    ) else Modifier
-                                                ),
-                                            onClick = {
-                                                selectedDate = thisDate
-                                                onDateSelected(thisDate)
-                                                onDismiss()
-                                            },
-                                            colors = ButtonDefaults.buttonColors(
-                                                backgroundColor = if (thisDate == selectedDate) Color(0xFF6366F1) else Color.White
-                                            ),
+                                            if (thisDate == selectedDate) Modifier.border(
+                                                BorderStroke(2.dp, ui.ParkColors.Primary), CircleShape
+                                            ) else Modifier
+                                        ),
+                                    onClick = {
+                                        selectedDate = thisDate
+                                        onDateSelected(thisDate)
+                                        onDismiss()
+                                    },
+                                    colors = ButtonDefaults.buttonColors(
+                                        backgroundColor = if (thisDate == selectedDate) ui.ParkColors.Primary else Color.White
+                                    ),
                                             shape = CircleShape,
                                             contentPadding = PaddingValues(0.dp)
                                         ) {

@@ -141,94 +141,27 @@ fun CreateCardScreen(navigator: Navigator) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                brush = Brush.verticalGradient(
-                    colors = listOf(
-                        Color(0xFF0F172A),
-                        Color(0xFF1E293B)
-                    )
-                )
-            )
+            .background(ui.ParkColors.Background)
     ) {
         Column(
             modifier = Modifier.fillMaxSize()
         ) {
-            // Header
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(
-                        brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                Color(0xFF6366F1),
-                                Color(0xFF8B5CF6),
-                                Color(0xFFEC4899)
-                            )
-                        )
-                    )
-                    .padding(24.dp)
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    TextButton(
-                        onClick = { navigator.navigateTo(Screen.FeatureMenu) }
-                    ) {
-                        Text("← Quay lại", color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.SemiBold)
-                    }
-                    Spacer(modifier = Modifier.width(16.dp))
-                    Column {
-                        Text(
-                            text = "✨ Tạo thẻ mới",
-                            fontSize = 28.sp,
-                            fontWeight = FontWeight.Bold,
-                            color = Color.White
-                        )
-                        Text(
-                            text = "Nhập đầy đủ thông tin chủ thẻ",
-                            fontSize = 14.sp,
-                            color = Color(0xFFF3E8FF)
-                        )
-                    }
-                }
-            }
+            ui.SectionHeader(
+                title = "Cấp thẻ mới",
+                subtitle = "Nhập đầy đủ thông tin chủ thẻ"
+            )
 
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(24.dp),
-                contentAlignment = Alignment.Center
+                    .padding(top = 16.dp),
+                contentAlignment = Alignment.TopCenter
             ) {
                 if (hasCardInfo) {
-                    // Nếu đã có thông tin, hiển thị một box đẹp thông báo
-                    Card(
-                        backgroundColor = Color(0xFF334155),
-                        shape = RoundedCornerShape(24.dp),
-                        elevation = 12.dp,
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .padding(48.dp)
-                                .widthIn(min = 360.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            verticalArrangement = Arrangement.Center
-                        ) {
-                            Text("🎫", fontSize = 52.sp)
-                            Spacer(Modifier.height(18.dp))
-                            Text(
-                                "Thẻ đã có thông tin",
-                                fontWeight = FontWeight.Bold,
-                                fontSize = 24.sp,
-                                color = Color(0xFF60A5FA)
-                            )
-                            Spacer(Modifier.height(10.dp))
-                            Text(
-                                "Bạn không thể đăng ký tạo thẻ mới trên thẻ này.",
-                                fontSize = 16.sp,
-                                color = Color(0xFFCBD5E1)
-                            )
-                        }
-                    }
+                    ui.StatusBanner(
+                        message = "Thẻ đã có thông tin. Bạn không thể đăng ký tạo thẻ mới trên thẻ này.",
+                        isWarning = true
+                    )
                 } else {
                     // Nếu chưa có thông tin, render form như cũ
                     Row(

@@ -156,23 +156,10 @@ fun ViewInfoScreen(navigator: Navigator) {
                         )
                     }
                     else -> {
-                        // Card chính hiển thị thông tin
-                        Card(
-                            modifier = Modifier
-                                .width(700.dp)
-                                .padding(vertical = 16.dp),
-                            shape = RoundedCornerShape(16.dp),
-                            backgroundColor = Color(0xFF1E293B),
-                            elevation = 8.dp
-                        ) {
-                            Column(
-                                modifier = Modifier.padding(32.dp)
-                            ) {
-                                // Header với icon
+                        ui.AppCard(modifier = Modifier.fillMaxWidth()) {
+                            Column(modifier = Modifier.fillMaxWidth()) {
                                 Row(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .padding(bottom = 24.dp),
+                                    modifier = Modifier.fillMaxWidth().padding(bottom = 20.dp),
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
                                     if (avatarImage != null) {
@@ -180,70 +167,40 @@ fun ViewInfoScreen(navigator: Navigator) {
                                             bitmap = avatarImage!!,
                                             contentDescription = "Ảnh đại diện",
                                             modifier = Modifier
-                                                .size(150.dp)
-                                                .clip(RoundedCornerShape(18.dp))
-                                                .padding(bottom = 12.dp)
+                                                .size(96.dp)
+                                                .clip(RoundedCornerShape(48.dp))
                                         )
-                                    } else {
-                                        Text(
-                                            "👤",
-                                            fontSize = 56.sp,
-                                            modifier = Modifier.padding(bottom = 8.dp)
-                                        )
+                                        Spacer(Modifier.width(16.dp))
                                     }
                                     Column {
                                         Text(
                                             fullName.ifEmpty { "Chưa có thông tin" },
-                                            fontSize = 24.sp,
+                                            fontSize = 20.sp,
                                             fontWeight = FontWeight.Bold,
-                                            color = Color.White
+                                            color = ui.ParkColors.TextPrimary
                                         )
                                         Text(
-                                            "ID: $idCard",
+                                            "CCCD: $idCard",
                                             fontSize = 14.sp,
-                                            color = Color(0xFF94A3B8)
+                                            color = ui.ParkColors.TextSecondary
                                         )
                                     }
                                 }
 
-                                Divider(
-                                    color = Color(0xFF475569),
-                                    modifier = Modifier.padding(vertical = 16.dp)
-                                )
+                                Divider(color = ui.ParkColors.Border, modifier = Modifier.padding(bottom = 12.dp))
 
-                                // Thông tin chi tiết
-                                Column(
-                                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                                ) {
-                                    InfoRow("CCCD/CMND", idCard.ifEmpty { "Chưa có dữ liệu" })
-                                    InfoRow("Họ và tên", fullName.ifEmpty { "Chưa có dữ liệu" })
-                                    InfoRow("Ngày sinh", dob.ifEmpty { "Chưa có dữ liệu" })
-                                    InfoRow("Địa chỉ", address.ifEmpty { "Chưa có dữ liệu" })
-                                    InfoRow("Số điện thoại", phone.ifEmpty { "Chưa có dữ liệu" })
-
-                                    Divider(color = Color(0xFF475569))
-
-                                    // Số dư nổi bật
-                                    Row(
-                                        modifier = Modifier.fillMaxWidth(),
-                                        horizontalArrangement = Arrangement.SpaceBetween,
-                                        verticalAlignment = Alignment.CenterVertically
-                                    ) {
-                                        Text(
-                                            "Số dư",
-                                            color = Color(0xFF94A3B8),
-                                            fontSize = 16.sp,
-                                            fontWeight = FontWeight.SemiBold
-                                        )
-                                        Text(
-                                            "${formatVnAmount(balance).ifEmpty { "0Đ" }} ",
-                                            color = Color(0xFF10B981),
-                                            fontSize = 20.sp,
-                                            fontWeight = FontWeight.Bold
-                                        )
-                                    }
-
-                                    InfoRow("Hạn sử dụng", expired.ifEmpty { "Chưa có dữ liệu" })
+                                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                                    ui.InfoRow("Số CCCD", idCard.ifEmpty { "Chưa có dữ liệu" })
+                                    ui.InfoRow("Họ và tên", fullName.ifEmpty { "Chưa có dữ liệu" })
+                                    ui.InfoRow("Ngày sinh", dob.ifEmpty { "Chưa có dữ liệu" })
+                                    ui.InfoRow("Địa chỉ", address.ifEmpty { "Chưa có dữ liệu" })
+                                    ui.InfoRow("Số điện thoại", phone.ifEmpty { "Chưa có dữ liệu" })
+                                    ui.InfoRow(
+                                        "Số dư",
+                                        "${formatVnAmount(balance).ifEmpty { "0" }} VNĐ",
+                                        valueColor = ui.ParkColors.PrimaryDark
+                                    )
+                                    ui.InfoRow("Hạn sử dụng", expired.ifEmpty { "Chưa có dữ liệu" }, showDivider = false)
                                 }
                             }
                         }

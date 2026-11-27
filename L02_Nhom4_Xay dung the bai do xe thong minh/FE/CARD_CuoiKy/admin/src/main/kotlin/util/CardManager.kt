@@ -482,25 +482,14 @@ object CardManager {
     ): Boolean {
         val ch = activeChannel ?: throw Exception("No card channel!")
 
-        val expiredBytes = newExpired.toByteArray(Charsets.UTF_8)
-
-        // Buffer: [msgLen(2)][msg][sigLen(2)][sig][expired]
-        val buffer = ByteArray(2 + messageBytes.size + 2 + sigBytes.size + expiredBytes.size)
-        var pos = 0
-
-        buffer[pos++] = (messageBytes.size shr 8).toByte()
-        buffer[pos++] = messageBytes.size.toByte()
-        messageBytes.copyInto(buffer, pos)
-        pos += messageBytes.size
-
-        buffer[pos++] = (sigBytes.size shr 8).toByte()
-        buffer[pos++] = sigBytes.size.toByte()
-        sigBytes.copyInto(buffer, pos)
-        pos += sigBytes.size
-
-        expiredBytes.copyInto(buffer, pos)
-
-        val cmd = CommandAPDU(0x00, 0x08, 0x00, 0x00, buffer) // INS_UPDATE_EXPIRED
+        val normalizedExpired = if (Regex("""^\d{2}/\d{2}/\d{4}$""").matches(newExpired.trim())) {
+            val parts = newExpired.trim().split("/")
+            "${parts[2]}-${parts[1]}-${parts[0]}"
+        } else {
+            newExpired.trim()
+        }
+        val expiredBytes = normalizedExpired.toByteArray(Charsets.UTF_8)
+        val cmd = CommandAPDU(0x00, 0x08, 0x00, 0x00, expiredBytes) // INS_UPDATE_EXPIRED
         val resp = ch.transmit(cmd)
 
         if (resp.sw != 0x9000) {

@@ -118,57 +118,33 @@ fun UpdatePinScreen(navigator: Navigator, repository: CardRepository) {
                                 fontWeight = FontWeight.Bold
                             )
                         }
-                        else -> Card(
-                            modifier = Modifier.width(400.dp).padding(vertical = 16.dp),
-                            shape = RoundedCornerShape(16.dp),
-                            backgroundColor = Color(0xFF1E293B),
-                            elevation = 8.dp
-                        ) {
-                            Column(
-                                modifier = Modifier.padding(24.dp),
-                                horizontalAlignment = Alignment.CenterHorizontally
-                            ) {
-                                Text("Nhập PIN mới", fontSize = 18.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                                Spacer(modifier = Modifier.height(16.dp))
+                        else -> ui.AppCard(modifier = Modifier.width(440.dp)) {
+                            Text("Nhập PIN mới", fontSize = 16.sp, fontWeight = FontWeight.Bold, color = ui.ParkColors.TextPrimary)
+                            Spacer(modifier = Modifier.height(16.dp))
 
-                                OutlinedTextField(
-                                    value = newPin,
-                                    onValueChange = { if (it.all { c -> c.isDigit() } && it.length <= 6) newPin = it },
-                                    label = { Text("PIN (4-6 số)", color = Color(0xFF94A3B8)) },
-                                    modifier = Modifier.fillMaxWidth(),
-                                    colors = TextFieldDefaults.outlinedTextFieldColors(
-                                        textColor = Color.White,
-                                        cursorColor = Color(0xFF06B6D4),
-                                        focusedBorderColor = Color(0xFF06B6D4),
-                                        unfocusedBorderColor = Color(0xFF475569)
-                                    ),
-                                    shape = RoundedCornerShape(12.dp),
-                                    visualTransformation = PasswordVisualTransformation(),
+                            OutlinedTextField(
+                                value = newPin,
+                                onValueChange = { if (it.all { c -> c.isDigit() } && it.length <= 6) newPin = it },
+                                label = { Text("PIN (4-6 số)") },
+                                modifier = Modifier.fillMaxWidth(),
+                                colors = ui.lightTextFieldColors(),
+                                shape = RoundedCornerShape(10.dp),
+                                visualTransformation = PasswordVisualTransformation(),
+                                singleLine = true
+                            )
 
-                                )
+                            Spacer(modifier = Modifier.height(16.dp))
 
-                                Spacer(modifier = Modifier.height(20.dp))
+                            ui.StatusBanner(errorText, isError = true)
+                            ui.StatusBanner(successText)
+                            if (errorText != null || successText != null) Spacer(modifier = Modifier.height(12.dp))
 
-                                if (errorText != null) {
-                                    Text(errorText!!, color = Color.Red, fontSize = 14.sp)
-                                    Spacer(modifier = Modifier.height(8.dp))
-                                }
-
-                                if (successText != null) {
-                                    Text(successText!!, color = Color.Green, fontSize = 14.sp)
-                                    Spacer(modifier = Modifier.height(8.dp))
-                                }
-
-                                Button(
-                                    onClick = doUpdatePin,
-                                    modifier = Modifier.fillMaxWidth().height(50.dp),
-                                    colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF06B6D4)),
-                                    shape = RoundedCornerShape(10.dp),
-                                    enabled = newPin.length in 4..6
-                                ) {
-                                    Text("Cập nhật PIN", color = Color.White, fontWeight = FontWeight.Bold)
-                                }
-                            }
+                            ui.PrimaryButton(
+                                text = "Cập nhật PIN",
+                                onClick = doUpdatePin,
+                                enabled = newPin.length in 4..6,
+                                modifier = Modifier.fillMaxWidth()
+                            )
                         }
                     }
                 }

@@ -124,110 +124,33 @@ fun UnlockCardScreen(navigator: Navigator, repository: CardRepository) {
                             )
                         }
                     }
-                    else -> Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        // Icon
-                        Card(
-                            modifier = Modifier
-                                .size(120.dp)
-                                .padding(bottom = 24.dp),
-                            shape = RoundedCornerShape(60.dp),
-                            backgroundColor = Color(0xFFFEF3C7),
-                            elevation = 8.dp
-                        ) {
-                            Box(
-                                contentAlignment = Alignment.Center,
-                                modifier = Modifier.fillMaxSize()
-                            ) {
-                                Text(text = "🔓", fontSize = 64.sp)
-                            }
-                        }
-
-                        // Title
+                    else -> Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        ui.AppCard(modifier = Modifier.width(460.dp)) {
                         Text(
                             text = "Mở khóa thẻ bị chặn",
-                            fontSize = 24.sp,
+                            fontSize = 18.sp,
                             fontWeight = FontWeight.Bold,
-                            color = Color.White,
-                            modifier = Modifier.padding(bottom = 8.dp)
+                            color = ui.ParkColors.TextPrimary
                         )
-
-                        // Description
+                        Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "Khi thẻ bị khóa do nhập sai PIN 5 lần,\nsử dụng chức năng này để reset số lần thử.",
+                            text = "Khi thẻ bị khóa do nhập sai PIN 5 lần, sử dụng chức năng này để đặt lại số lần thử.",
                             fontSize = 14.sp,
-                            color = Color(0xFF94A3B8),
-                            modifier = Modifier.padding(bottom = 32.dp)
+                            color = ui.ParkColors.TextSecondary
                         )
-
-                        // Error message
-                        if (errorText != null) {
-                            Card(
-                                modifier = Modifier.width(400.dp).padding(bottom = 16.dp),
-                                shape = RoundedCornerShape(12.dp),
-                                backgroundColor = Color(0xFFF87171).copy(alpha = 0.1f),
-                                elevation = 0.dp
-                            ) {
-                                Text(
-                                    errorText!!,
-                                    color = Color(0xFFF87171),
-                                    fontSize = 14.sp,
-                                    modifier = Modifier.padding(16.dp)
-                                )
-                            }
-                        }
-
-                        // Success message
-                        if (successText != null) {
-                            Card(
-                                modifier = Modifier.width(400.dp).padding(bottom = 16.dp),
-                                shape = RoundedCornerShape(12.dp),
-                                backgroundColor = Color(0xFF10B981).copy(alpha = 0.1f),
-                                elevation = 0.dp
-                            ) {
-                                Text(
-                                    successText!!,
-                                    color = Color(0xFF10B981),
-                                    fontSize = 14.sp,
-                                    modifier = Modifier.padding(16.dp)
-                                )
-                            }
-                        }
-
-                        // Unlock button
-                        Button(
+                        Spacer(modifier = Modifier.height(16.dp))
+                        ui.StatusBanner(errorText, isError = true)
+                        ui.StatusBanner(successText)
+                        if (errorText != null || successText != null) Spacer(modifier = Modifier.height(12.dp))
+                        ui.PrimaryButton(
+                            text = "Mở khóa thẻ",
                             onClick = doUnlock,
-                            modifier = Modifier.width(400.dp).height(56.dp),
-                            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFFF59E0B)),
-                            shape = RoundedCornerShape(12.dp),
-                            enabled = !isLoading
-                        ) {
-                            if (isLoading) {
-                                CircularProgressIndicator(
-                                    modifier = Modifier.size(24.dp),
-                                    color = Color.White
-                                )
-                            } else {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.Center
-                                ) {
-                                    Text(
-                                        text = "🔓",
-                                        fontSize = 20.sp,
-                                        modifier = Modifier.padding(end = 8.dp)
-                                    )
-                                    Text(
-                                        "Mở khóa thẻ",
-                                        color = Color.White,
-                                        fontSize = 16.sp,
-                                        fontWeight = FontWeight.Bold
-                                    )
-                                }
-                            }
-                        }
+                            enabled = !isLoading,
+                            isLoading = isLoading,
+                            backgroundColor = ui.ParkColors.Warning,
+                            modifier = Modifier.fillMaxWidth()
+                        )
+                    }
 
                         // Note
                         Card(
@@ -253,7 +176,7 @@ fun UnlockCardScreen(navigator: Navigator, repository: CardRepository) {
                                     Text(
                                         text = "• Chức năng này chỉ reset số lần thử\n• PIN cũ vẫn được giữ nguyên\n• Sau khi mở khóa, user dùng PIN cũ để đăng nhập",
                                         fontSize = 12.sp,
-                                        color = Color(0xFF94A3B8),
+                                        color = ui.ParkColors.TextSecondary,
                                         lineHeight = 18.sp
                                     )
                                 }

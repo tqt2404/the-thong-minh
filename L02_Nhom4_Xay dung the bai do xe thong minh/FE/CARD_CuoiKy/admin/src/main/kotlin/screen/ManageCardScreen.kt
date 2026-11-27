@@ -215,41 +215,42 @@ fun ManageCardScreen(navigator: Navigator, cardRepository: CardRepository) {
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Card(
-                                modifier = Modifier.width(320.dp).height(550.dp),
-                                shape = RoundedCornerShape(20.dp),
-                                backgroundColor = Color(0xFF1E293B),
-                                elevation = 8.dp
+                                modifier = Modifier.width(300.dp).height(520.dp),
+                                shape = RoundedCornerShape(12.dp),
+                                backgroundColor = ui.ParkColors.Surface,
+                                border = BorderStroke(1.dp, ui.ParkColors.Border),
+                                elevation = 0.dp
                             ) {
                                 Column(
-                                    modifier = Modifier.fillMaxSize().padding(28.dp),
+                                    modifier = Modifier.fillMaxSize().padding(24.dp),
                                     horizontalAlignment = Alignment.CenterHorizontally
                                 ) {
                                     Text(
-                                        "🖼️ Ảnh đại diện",
-                                        fontSize = 20.sp,
+                                        "Ảnh đại diện",
+                                        fontSize = 16.sp,
                                         fontWeight = FontWeight.Bold,
-                                        color = Color(0xFFF1F5F9)
+                                        color = ui.ParkColors.TextPrimary
                                     )
-                                    Spacer(modifier = Modifier.height(24.dp))
+                                    Spacer(modifier = Modifier.height(20.dp))
                                     Box(
-                                        modifier = Modifier.size(220.dp)
-                                            .clip(RoundedCornerShape(16.dp))
-                                            .background(Color(0xFF334155))
-                                            .border(3.dp, Color(0xFF6366F1), RoundedCornerShape(16.dp)),
+                                        modifier = Modifier.size(200.dp)
+                                            .clip(RoundedCornerShape(12.dp))
+                                            .background(ui.ParkColors.SurfaceMuted)
+                                            .border(1.dp, ui.ParkColors.Border, RoundedCornerShape(12.dp)),
                                         contentAlignment = Alignment.Center
                                     ) {
                                         if (avatarImage != null) {
                                             Image(
                                                 bitmap = avatarImage!!,
                                                 contentDescription = "Avatar",
-                                                modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(16.dp)),
+                                                modifier = Modifier.fillMaxSize().clip(RoundedCornerShape(12.dp)),
                                                 contentScale = ContentScale.Crop
                                             )
                                         } else {
                                             Text(
-                                                "📷\nChưa có ảnh",
-                                                fontSize = 16.sp,
-                                                color = Color(0xFF94A3B8),
+                                                "Chưa có ảnh",
+                                                fontSize = 14.sp,
+                                                color = ui.ParkColors.TextSecondary,
                                                 fontWeight = FontWeight.Medium
                                             )
                                         }
@@ -466,22 +467,10 @@ fun FormTextField(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-        label = {
-            Text(
-                label,
-                color = Color(0xFF94A3B8),
-                fontSize = 14.sp
-            )
-        },
+        label = { Text(label) },
         modifier = modifier.fillMaxWidth(),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            textColor = Color(0xFFF1F5F9),
-            cursorColor = Color(0xFF8B5CF6),
-            focusedBorderColor = Color(0xFF8B5CF6),
-            unfocusedBorderColor = Color(0xFF475569),
-            backgroundColor = Color(0xFF0F172A)
-        ),
-        shape = RoundedCornerShape(12.dp),
+        colors = ui.lightTextFieldColors(),
+        shape = RoundedCornerShape(10.dp),
         singleLine = true,
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None
     )

@@ -30,24 +30,18 @@ fun LoginTab(navigator: Navigator) {
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(
-            "🔐",
-            fontSize = 64.sp,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-
-        Text(
-            "Đăng nhập",
-            fontSize = 28.sp,
+            "Đăng nhập thẻ",
+            fontSize = 22.sp,
             fontWeight = FontWeight.Bold,
-            color = Color.White,
-            modifier = Modifier.padding(bottom = 8.dp)
+            color = ui.ParkColors.TextPrimary,
+            modifier = Modifier.padding(bottom = 6.dp)
         )
 
         Text(
             "Nhập mã PIN của bạn",
             fontSize = 14.sp,
-            color = Color(0xFF94A3B8),
-            modifier = Modifier.padding(bottom = 32.dp)
+            color = ui.ParkColors.TextSecondary,
+            modifier = Modifier.padding(bottom = 24.dp)
         )
 
         OutlinedTextField(
@@ -61,17 +55,12 @@ fun LoginTab(navigator: Navigator) {
                     }
                 }
             },
-            label = { Text("Mã PIN", color = Color(0xFF94A3B8)) },
-            placeholder = { Text("Nhập 4-6 số", color = Color(0xFF64748B)) },
+            label = { Text("Mã PIN") },
+            placeholder = { Text("Nhập 4-6 số") },
             visualTransformation = PasswordVisualTransformation(),
             modifier = Modifier.fillMaxWidth(),
-            colors = TextFieldDefaults.outlinedTextFieldColors(
-                textColor = Color.White,
-                cursorColor = Color(0xFF6366F1),
-                focusedBorderColor = Color(0xFF6366F1),
-                unfocusedBorderColor = Color(0xFF475569)
-            ),
-            shape = RoundedCornerShape(12.dp),
+            colors = ui.lightTextFieldColors(),
+            shape = RoundedCornerShape(10.dp),
             singleLine = true
         )
 
